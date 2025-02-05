@@ -50,9 +50,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Deploy to production
-        run: "Deploy"
         # Add deployment commands here (e.g., SSH into server, deploy scripts, etc.)
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.0
