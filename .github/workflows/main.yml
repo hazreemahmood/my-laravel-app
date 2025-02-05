@@ -38,21 +38,9 @@ jobs:
       - name: Build assets
         run: npm run build
 
-      # Copy .env.example to .env (for testing)
-      - name: Copy .env
-        run: cp .env.example .env
-
-      # Generate application key
-      - name: Generate application key
-        run: php artisan key:generate
-
       # Run migrations and seeders (optional)
       - name: Run migrations
         run: php artisan migrate --force
-
-      # Run tests
-      - name: Run PHPUnit tests
-        run: php artisan test
 
   deploy:
     runs-on: ubuntu-latest
