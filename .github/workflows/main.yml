@@ -61,7 +61,7 @@ jobs:
           passphrase: 12345
           script: |
             ssh-keyscan github.com >> ~/.ssh/known_hosts
-            git config --global user.email "hazreemahmood@github.com"
+            git config --global user.email "hazreemahmood@gmail.com"
             git config --global user.name "Hazree Mahmood"
             cd /var/www/html/my-laravel-app
             git pull
