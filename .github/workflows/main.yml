@@ -55,7 +55,7 @@ jobs:
         run: echo "Deploying to production..."
         # Add deployment commands here (e.g., SSH into server, deploy scripts, etc.)
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: http://175.142.232.32/
           username: "itsaie"
