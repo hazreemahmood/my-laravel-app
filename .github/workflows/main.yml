@@ -60,5 +60,6 @@ jobs:
           script: |
             whoami
             cd /var/www/html/my-laravel-app
+            git remote set-url origin git@github.com:hazreemahmood/my-laravel-app.git
             git pull
             php artisan optimize:clear
