@@ -48,8 +48,6 @@ jobs:
     if: github.ref == 'refs/heads/main' # Only deploy on main branch
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
         # Add deployment commands here (e.g., SSH into server, deploy scripts, etc.)
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.0
@@ -60,9 +58,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: 12345
           script: |
-            ssh-keyscan github.com >> ~/.ssh/known_hosts
-            git config --global user.email "hazreemahmood@gmail.com"
-            git config --global user.name "Hazree Mahmood"
+            whoami
             cd /var/www/html/my-laravel-app
             git pull
             php artisan optimize:clear
