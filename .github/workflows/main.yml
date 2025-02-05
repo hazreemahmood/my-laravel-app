@@ -61,6 +61,7 @@ jobs:
           port: 2222
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: 12345
           script: |
             cd /var/www/my-laravel-app
             git pull origin main
