@@ -39,8 +39,8 @@ jobs:
         run: npm run build
 
       # Run migrations and seeders (optional)
-      - name: Run migrations
-        run: php artisan migrate --force
+      #- name: Run migrations
+      #  run: php artisan migrate --force
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,5 +52,19 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy to production
-        run: echo "Deploying to production..."
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
         # Add deployment commands here (e.g., SSH into server, deploy scripts, etc.)
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: 2222
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: 12345
+          script: |
+            cd /var/www/html/my-laravel-app
+            git pull origin main
+            composer install --optimize-autoloader --no-dev
+            php artisan optimize:clear
+            php artisan optimize
