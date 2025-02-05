@@ -63,7 +63,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: 12345
           script: |
-            cd /var/www/my-laravel-app
+            cd /var/www/html/my-laravel-app
             git pull origin main
             composer install --optimize-autoloader --no-dev
             php artisan optimize:clear
