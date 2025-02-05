@@ -58,7 +58,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: 12345
           script: |
-            whoami
+            ssh itsaie@175.142.232.32
+            Hazree@91
             cd /var/www/html/my-laravel-app
             git pull
             php artisan optimize:clear
