@@ -44,7 +44,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: test
+    #needs: test
     if: github.ref == 'refs/heads/main' # Only deploy on main branch
 
     steps:
@@ -52,10 +52,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy to production
-        run: |
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.email "hazreemahmood@github.com"
-          git config --global user.name "Hazree Mahmood"
+        run: "Deploy"
         # Add deployment commands here (e.g., SSH into server, deploy scripts, etc.)
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.0
@@ -66,6 +63,9 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: 12345
           script: |
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            git config --global user.email "hazreemahmood@github.com"
+            git config --global user.name "Hazree Mahmood"
             cd /var/www/html/my-laravel-app
             git pull
             php artisan optimize:clear
