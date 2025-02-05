@@ -39,8 +39,8 @@ jobs:
         run: npm run build
 
       # Run migrations and seeders (optional)
-      - name: Run migrations
-        run: php artisan migrate --force
+      #- name: Run migrations
+      #  run: php artisan migrate --force
 
   deploy:
     runs-on: ubuntu-latest
