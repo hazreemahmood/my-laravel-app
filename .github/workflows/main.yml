@@ -52,7 +52,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deploy to production
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
+        run: |
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.email "hazreemahmood@github.com"
+          git config --global user.name "Hazree Mahmood"
         # Add deployment commands here (e.g., SSH into server, deploy scripts, etc.)
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.0
