@@ -64,7 +64,5 @@ jobs:
           passphrase: 12345
           script: |
             cd /var/www/html/my-laravel-app
-            git pull origin main
-            composer install --optimize-autoloader --no-dev
+            git pull
             php artisan optimize:clear
-            php artisan optimize
