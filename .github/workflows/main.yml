@@ -57,9 +57,9 @@ jobs:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: http://175.142.232.32/
-          username: "itsaie"
-          key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDNs8QWYoVkO9G8PRlWZSECebELou9h6/EcyMD3YkspWC2AdwqRQluALKXYXJ6Fs9QeNmwARqkrsW9JJWCsls/wR2go8+FMwgrm9dWyAxNmtibpW10Pk7GQ4+tv8AODUq2g4dd8dQc42ic1FOC4bP+F4LrlpEfo8EAwNurDjhhkpjsP1XMZEYw6n/AMn1U/RczrR+hU46f/ZmeVYNBEaTTzZT+c3td3UY2VbICpEIvkQkI74pXv6jIUSvC73wC7oCjRIocnjct6yZ+i2uZjsdgMHPxB9JeYBzZoCs/TA7mS1wb3XE6/NhSo7e+aE8mL2naSRSryRO5ar+gl1iAc2j9oBIzEJPdh3cHbS62zhf/wjCufoDosIBCxCihCr8wiCZvooAqOt2qbJ4IZPZ1k8tyws4dFJGywTFfJ7y9YKkRQu1cW4C4eDpWAvS5LCJZeAqNVx0cqI6Ti1CyN1ZQS8ij9VwN+RU4OmJsxI0U+QUXfpQ5o84M+1pcC0Xu+Ht0w23ZDI5AGv+DkTZnrTPNuDWt5CIz/wqzIX59CedQpintOs+4GkCYzLPLJzIFGK0JNlLMh++QHafhXFz0wzwM89T1hVyrg46YsCYfgdBYDiGUMW0ENRt7dwv7LIcpPqxpnAJAL8I5ARsk5sF/pjB5GsuWzc3f0Iw7tRK2wzgilI7ATZQ== hazreemahmood@gmail.com"
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/my-laravel-app
             git pull origin main
