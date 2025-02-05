@@ -64,6 +64,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: 12345
+          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           script: |
             whoami
             cd /var/www/html/my-laravel-app
