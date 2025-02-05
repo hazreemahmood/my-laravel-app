@@ -50,7 +50,7 @@ jobs:
     steps:
         # Add deployment commands here (e.g., SSH into server, deploy scripts, etc.)
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.0
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.SSH_HOST }}
           port: 2222
@@ -58,6 +58,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: 12345
           script: |
+            whoami
             cd /var/www/html/my-laravel-app
             git pull
             php artisan optimize:clear
