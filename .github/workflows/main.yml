@@ -64,10 +64,10 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: 12345
-          fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          #fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          #git remote set-url origin git@github.com:hazreemahmood/my-laravel-app.git
           script: |
             whoami
             cd /var/www/html/my-laravel-app
-            git remote set-url origin git@github.com:hazreemahmood/my-laravel-app.git
             git pull
             php artisan optimize:clear
