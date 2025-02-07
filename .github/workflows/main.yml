@@ -66,9 +66,14 @@ jobs:
           passphrase: 12345
           #fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           #git remote set-url origin git@github.com:hazreemahmood/my-laravel-app.git
+            #ssh -T git@github.com
+            #passphrase: 12345
+            #cd /var/www/html/my-laravel-app
+            #git pull
+            #php artisan optimize:clear
           script: |
-            ssh -T git@github.com
-            passphrase: 12345
+            eval "$(ssh-agent -s)"
+            ssh-add ~/.ssh/id_rsa.pub
             cd /var/www/html/my-laravel-app
-            git pull
+            git pull origin main
             php artisan optimize:clear
