@@ -68,7 +68,7 @@ jobs:
           #git remote set-url origin git@github.com:hazreemahmood/my-laravel-app.git
           script: |
             ssh -T git@github.com
-            fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+            passphrase: 12345
             cd /var/www/html/my-laravel-app
             git pull
             php artisan optimize:clear
