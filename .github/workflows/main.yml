@@ -73,7 +73,7 @@ jobs:
             #php artisan optimize:clear
           script: |
             eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/id_rsa.pub
+            ssh-add ~/.ssh/id_rsa
             cd /var/www/html/my-laravel-app
             git pull origin main
             php artisan optimize:clear
