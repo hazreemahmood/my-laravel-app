@@ -16,7 +16,9 @@
 <input type="file" id="file-input">
 
 <script>
-    const socket = io('http://localhost:3000');
+    const baseUrl = window.location.origin;
+
+    const socket = io(baseUrl + ':3000');
     const chatBox = document.getElementById('chat-box');
 
     // Send text message
