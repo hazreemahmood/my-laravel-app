@@ -63,7 +63,7 @@ jobs:
           port: 2222
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          passphrase: 1234
+          #passphrase: 1234
           #fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           #git remote set-url origin git@github.com:hazreemahmood/my-laravel-app.git
             #ssh -T git@github.com
