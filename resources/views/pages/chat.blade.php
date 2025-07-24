@@ -53,6 +53,8 @@
                 fileUrl: data.fileUrl,
                 fileType: data.fileType
             });
+            formData.append('user', document.getElementById('username').value);
+
         });
     };
 
