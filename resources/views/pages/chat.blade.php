@@ -3,6 +3,7 @@
 <head>
     <title>Laravel Chat with Files</title>
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 
@@ -37,8 +38,13 @@
         const formData = new FormData();
         formData.append('file', file);
 
+        // ✅ Get CSRF token from meta tag
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
         fetch('/upload', {
             method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken // ✅ Include the token here
+            },
             body: formData
         }).then(res => res.json()).then(data => {
             socket.emit('sendMessage', {
