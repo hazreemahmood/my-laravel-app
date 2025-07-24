@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ChatMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+// routes/api.php
+Route::post('/store-message', function (Request $request) {
+    ChatMessage::create($request->only('user', 'message', 'file_url', 'file_type'));
+    return response()->json(['status' => 'saved']);
 });
