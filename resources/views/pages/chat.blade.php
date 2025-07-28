@@ -22,6 +22,14 @@
     const socket = io(baseUrl + ':3000');
     const chatBox = document.getElementById('chat-box');
 
+    // Load previous messages
+    fetch('/fetchmessage')
+    .then(res => res.json())
+    .then(messages => {
+        messages.forEach(data => {
+            displayMessage(data);
+        });
+    });
     // Send text message
     document.getElementById('send-btn').onclick = function () {
         const user = document.getElementById('username').value;
@@ -73,6 +81,23 @@
         chatBox.innerHTML += html;
         chatBox.scrollTop = chatBox.scrollHeight;
     });
+    
+    // Display message (reusable)
+    function displayMessage(data) {
+        let html = `<div><strong>${data.user}:</strong> ${data.message}</div>`;
+
+        if (data.file_type?.startsWith('image/')) {
+            html += `<img src="${data.file_url}" style="max-width:200px;">`;
+        } else if (data.file_type === 'application/pdf') {
+            html += `<div><a href="${data.file_url}" target="_blank">📄 View PDF</a></div>`;
+        } else if (data.file_url) {
+            html += `<div><a href="${data.file_url}" download>📎 Download file</a></div>`;
+        }
+
+        chatBox.innerHTML += html;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
 </script>
 
 </body>

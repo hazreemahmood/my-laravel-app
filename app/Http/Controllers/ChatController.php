@@ -35,4 +35,9 @@ class ChatController extends Controller
 
         return response()->json(['error' => 'No file uploaded'], 400);
     }
+    public function fetchMessages()
+    {
+        return response()->json(ChatMessage::orderBy('created_at', 'asc')->get());
+    }
+
 }
