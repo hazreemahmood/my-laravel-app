@@ -79,7 +79,7 @@
         }
     });
 
-    io.on('connection', (socket) => {
+    socket.on('connection', (socket) => {
         console.log('A user connected');
         socket.on('sendMessage', (data) => {
             io.emit('newMessage', data);
