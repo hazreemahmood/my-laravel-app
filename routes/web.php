@@ -49,6 +49,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');// routes/web.php
 	Route::get('/chat', [ChatController::class, 'index']);
 	Route::post('/upload', [ChatController::class, 'upload']);
-	Route::post('/fetchmessage', [ChatController::class, 'fetchMessages']);
+	Route::get('/fetchmessage', [ChatController::class, 'fetchMessages']);
 
 });
