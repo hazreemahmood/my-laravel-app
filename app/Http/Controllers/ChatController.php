@@ -37,7 +37,6 @@ class ChatController extends Controller
     }
     public function fetchMessages()
     {
-        echo 'test';
         return response()->json(ChatMessage::orderBy('created_at', 'asc')->get());
     }
 
