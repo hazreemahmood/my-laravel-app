@@ -23,7 +23,7 @@
     const chatBox = document.getElementById('chat-box');
 
     // Load previous messages
-    fetch('/fetchmessage')
+    fetch('fetchmessage')
     .then(res => res.json())
     .then(messages => {
         messages.forEach(data => {
@@ -81,7 +81,7 @@
         chatBox.innerHTML += html;
         chatBox.scrollTop = chatBox.scrollHeight;
     });
-    
+
     // Display message (reusable)
     function displayMessage(data) {
         let html = `<div><strong>${data.user}:</strong> ${data.message}</div>`;
