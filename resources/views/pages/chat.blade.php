@@ -73,6 +73,20 @@
         chatBox.innerHTML += html;
         chatBox.scrollTop = chatBox.scrollHeight;
     });
+    const io = require('socket.io')(3000, {
+        cors: {
+            origin: '*'
+        }
+    });
+
+    io.on('connection', (socket) => {
+        console.log('A user connected');
+        socket.on('sendMessage', (data) => {
+            io.emit('newMessage', data);
+        });
+    });
+
+    console.log('✅ WebSocket server running on port 3000');
 </script>
 
 </body>
