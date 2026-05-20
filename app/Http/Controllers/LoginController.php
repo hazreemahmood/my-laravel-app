@@ -16,7 +16,6 @@ class LoginController extends Controller
      */
     public function show()
     {
-        phpinfo();
         return view('auth.login');
     }
 
