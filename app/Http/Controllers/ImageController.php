@@ -18,7 +18,6 @@ class ImageController extends Controller
         if (is_dir($uploadDir)) {
             $files = array_diff(scandir($uploadDir), ['.', '..']);
             $files = array_values($files);
-            
             foreach ($files as $file) {
                 $filePath = $uploadDir . '/' . $file;
                 $images[] = [
