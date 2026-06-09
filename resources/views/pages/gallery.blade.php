@@ -7,7 +7,7 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h6>Image Gallerysssssssssss</h6>
+                        <h6>Image Gallery</h6>
                         <button class="btn btn-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#uploadModal">
                             <i class="fas fa-upload me-1"></i> Upload Image
                         </button>
