@@ -43,23 +43,36 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
-        ]);
-
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/images'), $filename);
-            
-            return response()->json([
-                'success' => true,
-                'url' => asset('uploads/images/' . $filename),
-                'message' => 'Image uploaded successfully!'
+        try {
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
             ]);
-        }
 
-        return response()->json(['success' => false, 'message' => 'No image uploaded.'], 400);
+            // Ensure upload directory exists
+            $uploadDir = public_path('uploads/images');
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $file = $request->file('image');
+                $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $file->getClientOriginalName());
+                $file->move($uploadDir, $filename);
+                
+                return response()->json([
+                    'success' => true,
+                    'url' => asset('uploads/images/' . $filename),
+                    'message' => 'Image uploaded successfully!'
+                ]);
+            }
+
+            return response()->json(['success' => false, 'message' => 'No valid image uploaded.'], 400);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false, 
+                'message' => 'Upload failed: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
