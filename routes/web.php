@@ -24,7 +24,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
-use App\Http\Controllers\ChangePassword;            
+use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\ImageController;            
             
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -46,6 +47,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
 	Route::get('/fetchmessage', [ChatController::class, 'fetchMessages']);
+	Route::get('/gallery', [ImageController::class, 'index'])->name('gallery');
+	Route::post('/images/store', [ImageController::class, 'store'])->name('images.store');
+	Route::post('/images/destroy', [ImageController::class, 'destroy'])->name('images.destroy');
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');// routes/web.php
 	Route::get('/chat', [ChatController::class, 'index']);
