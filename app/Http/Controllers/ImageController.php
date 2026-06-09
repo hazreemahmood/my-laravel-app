@@ -9,10 +9,11 @@ class ImageController extends Controller
     /**
      * Display the image upload form and gallery.
      */
-    public function index()
+    public function index(Request $request)
     {
         $images = [];
         $uploadDir = public_path('uploads/images');
+        $openUpload = $request->query('upload', 0);
         
         if (is_dir($uploadDir)) {
             $files = array_diff(scandir($uploadDir), ['.', '..']);
@@ -34,7 +35,7 @@ class ImageController extends Controller
             });
         }
 
-        return view('pages.gallery', compact('images'));
+        return view('pages.gallery', compact('images', 'openUpload'));
     }
 
     /**

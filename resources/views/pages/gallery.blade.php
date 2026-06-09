@@ -102,6 +102,14 @@
 
 @push('js')
 <script>
+    // Auto-open upload modal if ?upload=1
+    @if($openUpload)
+        document.addEventListener('DOMContentLoaded', function() {
+            var uploadModal = new bootstrap.Modal(document.getElementById('uploadModal'));
+            uploadModal.show();
+        });
+    @endif
+
     // Upload form submission
     document.getElementById('uploadForm').addEventListener('submit', function(e) {
         e.preventDefault();
