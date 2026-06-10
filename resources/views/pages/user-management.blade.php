@@ -56,15 +56,15 @@
                                         <p class="text-sm font-weight-bold mb-0">{{ $user->created_at ? $user->created_at->format('d/m/Y') : 'N/A' }}</p>
                                     </td>
                                     <td class="align-middle text-end">
-                                        <div class="d-flex px-3 py-1 justify-content-center align-items-center gap-2">
-                                            <a href="{{ route('user-management.edit', $user->id) }}" class="btn btn-link text-secondary mb-0 p-1" data-bs-toggle="tooltip" title="Edit user">
-                                                <i class="fas fa-pencil-alt text-sm"></i>
+                                        <div class="d-flex px-3 py-1 justify-content-center align-items-center gap-3">
+                                            <a href="{{ route('user-management.edit', $user->id) }}" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="tooltip" title="Edit user">
+                                                <i class="fas fa-pencil-alt text-sm me-1"></i> Edit
                                             </a>
                                             <form method="POST" action="{{ route('user-management.destroy', $user->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-link text-danger mb-0 p-1" data-bs-toggle="tooltip" title="Delete user">
-                                                    <i class="fas fa-trash-alt text-sm"></i>
+                                                <button type="submit" class="btn btn-outline-danger btn-sm mb-0" data-bs-toggle="tooltip" title="Delete user">
+                                                    <i class="fas fa-trash-alt text-sm me-1"></i> Delete
                                                 </button>
                                             </form>
                                         </div>
