@@ -100,7 +100,6 @@ jobs:
               "timestamp": "'"$(date -u +%Y-%m-%dT%H:%M:%SZ)"'"
             }]
           }' "${{ secrets.DISCORD_WEBHOOK_URL }}"
-
       # Send Discord notification on deployment failure
       - name: Discord notification - Deployment failed
         if: failure()
