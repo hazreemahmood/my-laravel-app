@@ -53,7 +53,7 @@
                                         <p class="text-sm font-weight-bold mb-0">{{ $user->role ?? 'Member' }}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">{{ $user->created_at->format('d/m/Y') }}</p>
+                                        <p class="text-sm font-weight-bold mb-0">{{ $user->created_at ? $user->created_at->format('d/m/Y') : 'N/A' }}</p>
                                     </td>
                                     <td class="align-middle text-end">
                                         <div class="d-flex px-3 py-1 justify-content-center align-items-center gap-2">
