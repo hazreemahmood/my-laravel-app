@@ -21,8 +21,11 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Options</h6>
+            <li class="nav-item mt-3 d-flex align-items-center">
+                <div class="ps-4">
+                    <i class="ni ni-settings-gear-65 text-sm opacity-6"></i>
+                </div>
+                <h6 class="ms-2 text-uppercase text-xs font-weight-bolder opacity-6 mb-0">Options</h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'user-management' || str_starts_with(Route::currentRouteName(), 'user-management.') ? 'active' : '' }}" href="{{ route('user-management') }}">

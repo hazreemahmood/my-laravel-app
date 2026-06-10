@@ -29,7 +29,7 @@
                         <span class="d-sm-inline d-none me-1">{{ auth()->user()->username ?? 'User' }}</span>
                         <i class="fa fa-chevron-down text-xs"></i>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="userDropdown">
+                    <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4 bg-white" aria-labelledby="userDropdown" style="min-width: 180px;">
                         <li class="mb-2">
                             <a class="dropdown-item border-radius-md" href="{{ route('profile') }}">
                                 <div class="d-flex py-1">
