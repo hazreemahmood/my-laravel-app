@@ -4,14 +4,20 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'User Management'])
     <div class="row mt-4 mx-4">
         <div class="col-12">
-            <div class="alert alert-light" role="alert">
-                This feature is available in <strong>Argon Dashboard 2 Pro Laravel</strong>. Check it
-                <strong>
-                    <a href="https://www.creative-tim.com/product/argon-dashboard-pro-laravel" target="_blank">
-                        here
-                    </a>
-                </strong>
-            </div>
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <span class="alert-text">{{ session('success') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <span class="alert-text">{{ session('error') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h6>Users</h6>
@@ -22,89 +28,55 @@
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Create Date</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Create Date</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse($users as $user)
                                 <tr>
                                     <td>
                                         <div class="d-flex px-3 py-1">
                                             <div>
-                                                <img src="./img/team-1.jpg" class="avatar me-3" alt="image">
+                                                <div class="avatar me-3 bg-primary d-flex align-items-center justify-content-center text-white rounded-circle">
+                                                    {{ strtoupper(substr($user->username, 0, 1)) }}
+                                                </div>
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Admin</h6>
+                                                <h6 class="mb-0 text-sm">{{ $user->username }}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-sm font-weight-bold mb-0">Admin</p>
+                                        <p class="text-sm font-weight-bold mb-0">{{ $user->role ?? 'Member' }}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">22/03/2022</p>
+                                        <p class="text-sm font-weight-bold mb-0">{{ $user->created_at->format('d/m/Y') }}</p>
                                     </td>
                                     <td class="align-middle text-end">
-                                        <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                            <p class="text-sm font-weight-bold mb-0">Edit</p>
-                                            <p class="text-sm font-weight-bold mb-0 ps-2">Delete</p>
+                                        <div class="d-flex px-3 py-1 justify-content-center align-items-center gap-2">
+                                            <a href="{{ route('user-management.edit', $user->id) }}" class="btn btn-link text-secondary mb-0 p-1" data-bs-toggle="tooltip" title="Edit user">
+                                                <i class="fas fa-pencil-alt text-sm"></i>
+                                            </a>
+                                            <form method="POST" action="{{ route('user-management.destroy', $user->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-link text-danger mb-0 p-1" data-bs-toggle="tooltip" title="Delete user">
+                                                    <i class="fas fa-trash-alt text-sm"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
+                                @empty
                                 <tr>
-                                    <td>
-                                        <div class="d-flex px-3 py-1">
-                                            <div>
-                                                <img src="./img/team-2.jpg" class="avatar me-3" alt="image">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Creator</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-sm font-weight-bold mb-0">Creator</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">22/03/2022</p>
-                                    </td>
-                                    <td class="align-middle text-end">
-                                        <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                            <p class="text-sm font-weight-bold mb-0">Edit</p>
-                                            <p class="text-sm font-weight-bold mb-0 ps-2">Delete</p>
-                                        </div>
+                                    <td colspan="4" class="text-center py-4">
+                                        <p class="text-sm font-weight-bold mb-0">No users found</p>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-3 py-1">
-                                            <div>
-                                                <img src="./img/team-3.jpg" class="avatar me-3" alt="image">
-                                            </div>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">Member</h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="text-sm font-weight-bold mb-0">Member</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <p class="text-sm font-weight-bold mb-0">22/03/2022</p>
-                                    </td>
-                                    <td class="align-middle text-end">
-                                        <div class="d-flex px-3 py-1 justify-content-center align-items-center">
-                                            <p class="text-sm font-weight-bold mb-0 cursor-pointer">Edit</p>
-                                            <p class="text-sm font-weight-bold mb-0 ps-2 cursor-pointer">Delete</p>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>

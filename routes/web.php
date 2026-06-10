@@ -9,6 +9,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\UserManagementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/chat', [ChatController::class, 'index']);
     Route::get('/fetchmessage', [ChatController::class, 'fetchMessages']);
     Route::post('/upload', [ChatController::class, 'upload']);
+    Route::get('/user-management', [UserManagementController::class, 'index'])->name('user-management');
+    Route::get('/user-management/edit/{id}', [UserManagementController::class, 'edit'])->name('user-management.edit');
+    Route::post('/user-management/update/{id}', [UserManagementController::class, 'update'])->name('user-management.update');
+    Route::delete('/user-management/destroy/{id}', [UserManagementController::class, 'destroy'])->name('user-management.destroy');
     Route::get('/gallery', [ImageController::class, 'index'])->name('gallery');
     Route::post('/images/store', [ImageController::class, 'store'])->name('images.store');
     Route::post('/images/destroy', [ImageController::class, 'destroy'])->name('images.destroy');
