@@ -18,9 +18,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="/assets/css/argon-dashboard.css" rel="stylesheet" />
+    <!-- Dark Mode CSS -->
+    <link href="/assets/css/dark-mode.css" rel="stylesheet" />
+    @stack('css')
 </head>
 
 <body class="{{ $class ?? '' }}">
+    @auth
+    <script>
+        // Apply dark mode class immediately to prevent flash
+        (function() {
+            var darkMode = {{ auth()->user()->dark_mode ? 'true' : 'false' }};
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+    </script>
+    @endauth
 
     @guest
         @yield('content')
@@ -62,6 +76,31 @@
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script>
+        function quickToggleDark() {
+            var checkbox = document.getElementById('dark-version');
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+                checkbox.onchange(checkbox);
+            } else {
+                // Fallback: toggle directly via AJAX
+                var isDark = !document.body.classList.contains('dark-mode');
+                if (isDark) {
+                    document.body.classList.add('dark-mode');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                }
+                fetch('{{ route("dark-mode.toggle") }}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }
+                });
+            }
+        }
+    </script>
     <script src="/assets/js/argon-dashboard.js"></script>
     @stack('js');
 </body>

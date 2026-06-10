@@ -10,6 +10,7 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserManagementController;
+use App\Http\Controllers\DarkModeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,5 +63,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/images/store', [ImageController::class, 'store'])->name('images.store');
     Route::post('/images/destroy', [ImageController::class, 'destroy'])->name('images.destroy');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/dark-mode/toggle', [DarkModeController::class, 'toggle'])->name('dark-mode.toggle');
     Route::get('/{page}', [PageController::class, 'index'])->name('page');
 });

@@ -28,7 +28,8 @@ class User extends Authenticatable
         'country',
         'postal',
         'about',
-        'photo'
+        'photo',
+        'dark_mode'
     ];
 
     /**

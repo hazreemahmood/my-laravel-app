@@ -60,7 +60,7 @@
                 <h6 class="mb-0">Light / Dark</h6>
                 <div class="form-check form-switch ps-0 ms-auto my-auto">
                     <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version"
-                        onclick="darkMode(this)">
+                        {{ auth()->user()->dark_mode ? 'checked' : '' }} onchange="toggleDarkMode(this)">
                 </div>
             </div>
             <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/argon-dashboard-laravel" target="_blank">Free Download</a>
@@ -71,9 +71,9 @@
                     data-icon="octicon-star" data-size="large" data-show-count="true"
                     aria-label="Star creativetimofficial/argon-dashboard on GitHub">Star</a>
                 <h6 class="mt-3">Thank you for sharing!</h6>
-                <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20made%20by%20%40CreativeTim%20and%20%40UPDIVISION%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard-laravel"
+                <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20made%20by%20%40CreativeTim%20and%20%40UPDIVISION%20%23webdesign%20%23dashboard%20%23bootstrap5&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard-laravel"
                     class="btn btn-dark mb-0 me-2" target="_blank">
-                    {{-- &amp;url2=https%3A%2F%2Fwww.updivision.com --}}
+                    {{-- &url2=https%3A%2F%2Fwww.updivision.com --}}
                     <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
                 </a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard-laravel"
@@ -84,3 +84,49 @@
         </div>
     </div>
 </div>
+
+@push('js')
+<script>
+    function toggleDarkMode(checkbox) {
+        var isDark = checkbox.checked;
+        
+        // Toggle the class on body
+        if (isDark) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+
+        // Save preference to server
+        fetch('{{ route("dark-mode.toggle") }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+            if (!data.success) {
+                // Revert if server fails
+                if (isDark) {
+                    document.body.classList.remove('dark-mode');
+                } else {
+                    document.body.classList.add('dark-mode');
+                }
+                checkbox.checked = !isDark;
+            }
+        })
+        .catch(function() {
+            // Revert on error
+            if (isDark) {
+                document.body.classList.remove('dark-mode');
+            } else {
+                document.body.classList.add('dark-mode');
+            }
+            checkbox.checked = !isDark;
+        });
+    }
+</script>
+@endpush
