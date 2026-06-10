@@ -39,9 +39,13 @@
                                     <td>
                                         <div class="d-flex px-3 py-1">
                                             <div>
-                                                <div class="avatar me-3 bg-primary d-flex align-items-center justify-content-center text-white rounded-circle">
-                                                    {{ strtoupper(substr($user->username, 0, 1)) }}
-                                                </div>
+                                                @if($user->photo)
+                                                    <img src="{{ asset('uploads/avatars/' . $user->photo) }}" alt="avatar" class="avatar me-3 rounded-circle shadow-sm" style="width: 40px; height: 40px; object-fit: cover;">
+                                                @else
+                                                    <div class="avatar me-3 bg-primary d-flex align-items-center justify-content-center text-white rounded-circle">
+                                                        {{ strtoupper(substr($user->username, 0, 1)) }}
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm">{{ $user->username }}</h6>
