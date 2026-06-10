@@ -300,7 +300,273 @@ body {
     border-radius: 2px;
 }
 
-/* Responsive */
+/* ========================================
+   Job Experience Timeline
+   Fun, interactive career showcase
+   ======================================== */
+
+.journey-section {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 1.5rem;
+    margin: 4rem auto 2rem;
+}
+
+.journey-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.journey-badge {
+    display: inline-block;
+    padding: 0.3rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(102, 126, 234, 0.15);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    color: #a8b4ff;
+    margin-bottom: 1rem;
+}
+
+.journey-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.journey-header h2 span {
+    background: linear-gradient(135deg, #667eea, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.journey-header p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+}
+
+/* Timeline layout */
+.timeline {
+    position: relative;
+    padding-left: 3rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, #667eea, #764ba2, rgba(102, 126, 234, 0.1));
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    animation: slideIn 0.6s ease-out backwards;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.3s; }
+.timeline-item:nth-child(3) { animation-delay: 0.5s; }
+.timeline-item:nth-child(4) { animation-delay: 0.7s; }
+.timeline-item:nth-child(5) { animation-delay: 0.9s; }
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Timeline dot with pulse */
+.timeline-dot {
+    position: absolute;
+    left: -3rem;
+    top: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+    z-index: 1;
+}
+
+.timeline-dot-pulse {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    animation: timelinePulse 2s ease-out infinite;
+}
+@keyframes timelinePulse {
+    0% { width: 30px; height: 30px; opacity: 1; }
+    100% { width: 54px; height: 54px; opacity: 0; }
+}
+
+/* Timeline card */
+.timeline-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #667eea, #c084fc);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.timeline-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(102, 126, 234, 0.2);
+    transform: translateX(6px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-card:hover::before {
+    opacity: 1;
+}
+
+.timeline-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.timeline-company {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.timeline-company .company-icon {
+    margin-right: 0.5rem;
+}
+
+.timeline-period {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.25rem 0.8rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.timeline-role {
+    font-size: 0.95rem;
+    color: #a8b4ff;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+}
+
+.timeline-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.7;
+}
+
+/* Fun "achievement unlocked" style highlights */
+.timeline-fun-facts {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+}
+
+.fun-fact {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 12px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.fun-fact:hover {
+    background: rgba(102, 126, 234, 0.12);
+    border-color: rgba(102, 126, 234, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.05);
+}
+
+/* Job stats row */
+.job-stats {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.job-stat {
+    text-align: center;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    min-width: 120px;
+    transition: all 0.3s ease;
+}
+
+.job-stat:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(102, 126, 234, 0.15);
+    transform: translateY(-3px);
+}
+
+.job-stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.job-stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.2rem;
+}
+
+/* Journey section responsive */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
@@ -326,10 +592,46 @@ body {
         padding: 12px 28px;
         font-size: 0.9rem;
     }
+
+    .job-stats {
+        gap: 1rem;
+    }
+    .job-stat {
+        padding: 0.8rem 1.2rem;
+        min-width: 90px;
+    }
+    .job-stat-number {
+        font-size: 1.5rem;
+    }
+    .journey-header h2 {
+        font-size: 1.8rem;
+    }
+    .timeline {
+        padding-left: 2.5rem;
+    }
+    .timeline-dot {
+        left: -2.5rem;
+        width: 24px;
+        height: 24px;
+        font-size: 0.7rem;
+    }
+    .timeline-card {
+        padding: 1.2rem;
+    }
+    .timeline-company {
+        font-size: 1.1rem;
+    }
+    .timeline-card-top {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
 }
 
 @media (max-width: 480px) {
     .highlights {
         grid-template-columns: 1fr 1fr;
+    }
+    .journey-section {
+        padding: 0 1rem;
     }
 }
