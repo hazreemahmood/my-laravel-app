@@ -6,8 +6,13 @@
         <div class="card-body p-3">
             <div class="row gx-4">
                 <div class="col-auto">
-                    <div class="avatar avatar-xl position-relative">
-                        <img src="/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                    <div class="avatar avatar-xl position-relative" id="avatarUpload" style="cursor: pointer;">
+                        <img src="{{ $user->photo ? asset('uploads/avatars/' . $user->photo) : '/img/team-1.jpg' }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        <div class="avatar-overlay">
+                            <i class="ni ni-camera-compact"></i>
+                            <span>Change Photo</span>
+                        </div>
+                        <input type="file" name="photo" accept="image/*" class="d-none" id="photoInput">
                     </div>
                 </div>
                 <div class="col-auto my-auto">
@@ -144,7 +149,7 @@
                         <div class="col-4 col-lg-4 order-lg-2">
                             <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
                                 <a href="javascript:;">
-                                    <img src="/img/team-2.jpg"
+                                    <img src="{{ $user->photo ? asset('uploads/avatars/' . $user->photo) : '/img/team-2.jpg' }}"
                                         class="rounded-circle img-fluid border border-2 border-white">
                                 </a>
                             </div>
@@ -182,10 +187,10 @@
                         </div>
                         <div class="text-center mt-4">
                             <h5>
-                                Mark Davis<span class="font-weight-light">, 35</span>
+                                {{ $user->firstname ?? 'Mark' }} {{ $user->lastname ?? 'Davis' }}<span class="font-weight-light">, 35</span>
                             </h5>
                             <div class="h6 font-weight-300">
-                                <i class="ni location_pin mr-2"></i>Bucharest, Romania
+                                <i class="ni location_pin mr-2"></i>{{ $user->city ?? 'Bucharest, Romania' }}
                             </div>
                             <div class="h6 mt-4">
                                 <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
@@ -200,4 +205,68 @@
         </div>
         @include('layouts.footers.auth.footer')
     </div>
+
+    <style>
+    .avatar {
+        position: relative;
+        overflow: hidden;
+    }
+    .avatar-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: inherit;
+        font-size: 12px;
+    }
+    .avatar:hover .avatar-overlay {
+        opacity: 1;
+    }
+    .avatar-overlay i {
+        font-size: 24px;
+        margin-bottom: 2px;
+    }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const avatarUpload = document.getElementById('avatarUpload');
+        const photoInput = document.getElementById('photoInput');
+        const profileForm = document.querySelector('.card form');
+
+        if (avatarUpload && photoInput) {
+            avatarUpload.addEventListener('click', function() {
+                photoInput.click();
+            });
+
+            photoInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Preview the selected image
+                        var img = avatarUpload.querySelector('img');
+                        if (img) {
+                            img.src = e.target.result;
+                        }
+                    };
+                    reader.readAsDataURL(this.files[0]);
+
+                    // Auto-submit the form
+                    if (profileForm) {
+                        profileForm.submit();
+                    }
+                }
+            });
+        }
+    });
+    </script>
 @endsection
