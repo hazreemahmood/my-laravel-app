@@ -18,11 +18,11 @@
                 </div>
             </div>
             <ul class="navbar-nav  justify-content-end">
-                <li class="nav-item dropdown d-flex align-items-center">
+                <li class="nav-item dropdown d-flex align-items-center bg-white rounded-3 px-2">
                     <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
                         @csrf
                     </form>
-                    <a href="javascript:;" class="nav-link text-white font-weight-bold px-0 d-flex align-items-center" 
+                    <a href="javascript:;" class="nav-link font-weight-bold px-0 d-flex align-items-center text-dark" 
                        id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="{{ auth()->user()->photo ? asset('uploads/avatars/' . auth()->user()->photo) : '/img/team-2.jpg' }}" 
                              class="avatar avatar-xs rounded-circle me-2" alt="user">
