@@ -81,4 +81,52 @@
         });
     }
 
+    // ========================================
+    // Timeline Card Expand/Collapse
+    // ========================================
+    const timelineCards = document.querySelectorAll('.timeline-card');
+
+    timelineCards.forEach(function(card) {
+        // Add click hint if details exist
+        const details = card.querySelector('.timeline-details');
+        if (details) {
+            const hint = document.createElement('div');
+            hint.className = 'click-hint';
+            hint.textContent = 'Click to explore';
+            card.appendChild(hint);
+
+            // Click to toggle
+            card.addEventListener('click', function(e) {
+                // Don't toggle if clicking a fun-fact tag
+                if (e.target.closest('.fun-fact')) return;
+
+                const isActive = card.classList.contains('active');
+                
+                // Close all other cards first (accordion behavior)
+                timelineCards.forEach(function(otherCard) {
+                    if (otherCard !== card) {
+                        otherCard.classList.remove('active');
+                    }
+                });
+
+                // Toggle this one
+                if (!isActive) {
+                    card.classList.add('active');
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+        }
+    });
+
+    // ========================================
+    // Smooth scroll to timeline from hero
+    // ========================================
+    // If user arrives from an anchor link
+    if (window.location.hash === '#career-journey') {
+        setTimeout(function() {
+            document.getElementById('career-journey').scrollIntoView({ behavior: 'smooth' });
+        }, 500);
+    }
+
 })();

@@ -427,7 +427,7 @@ body {
     padding: 1.5rem 2rem;
     backdrop-filter: blur(10px);
     transition: all 0.4s ease;
-    cursor: default;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
 }
@@ -495,6 +495,105 @@ body {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.55);
     line-height: 1.7;
+}
+
+/* Expand/collapse icon */
+.timeline-expand-icon {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.5rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.timeline-card.active .timeline-expand-icon {
+    transform: rotate(180deg);
+    color: #a8b4ff;
+}
+
+/* Expandable details panel */
+.timeline-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
+    opacity: 0;
+    margin-top: 0;
+}
+
+.timeline-card.active .timeline-details {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 1.2rem;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.detail-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.detail-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #c084fc;
+    display: block;
+    margin-bottom: 0.6rem;
+}
+
+.detail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.detail-list li {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+    padding-left: 1.1rem;
+    position: relative;
+    margin-bottom: 0.3rem;
+}
+
+.detail-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-size: 0.7rem;
+}
+
+.detail-list li:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Hint text "Click to expand" */
+.timeline-card .click-hint {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.timeline-card.active .click-hint {
+    opacity: 0;
 }
 
 /* Fun "achievement unlocked" style highlights */

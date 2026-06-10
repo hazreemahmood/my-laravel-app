@@ -133,7 +133,7 @@
                     <div class="timeline-dot-pulse"></div>
                     <span>⚡</span>
                 </div>
-                <div class="timeline-card">
+                <div class="timeline-card" data-job="makeover-guys">
                     <div class="timeline-card-top">
                         <div class="timeline-company">
                             <span class="company-icon">💅</span>
@@ -154,6 +154,37 @@
                         <span class="fun-fact">🤖 AI-Assisted Coding</span>
                         <span class="fun-fact">🔧 System Performance</span>
                     </div>
+                    <div class="timeline-expand-icon">▼</div>
+                    <div class="timeline-details">
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">🎯 Key Achievements</span>
+                                <ul class="detail-list">
+                                    <li>Designed scalable full-stack modules using CodeIgniter, MySQL, JavaScript & jQuery</li>
+                                    <li>Developed internal messaging and notification flows for seamless UX</li>
+                                    <li>Led features end-to-end from requirement analysis to production monitoring</li>
+                                    <li>Built responsive React UI components with REST API integrations</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">🛠️ Tech Highlights</span>
+                                <ul class="detail-list">
+                                    <li>Integrated NetSuite and Atome third-party services</li>
+                                    <li>Optimized backend services and MySQL queries</li>
+                                    <li>Enhanced system reliability through refactoring and performance tuning</li>
+                                    <li>Leveraged AI tools to accelerate development and automate tasks</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">👥 Collaboration</span>
+                                <ul class="detail-list">
+                                    <li>Worked cross-functionally with Product, UX, and engineering teams</li>
+                                    <li>Participated in code reviews and CI/CD workflows</li>
+                                    <li>Troubleshot production issues with minimal downtime</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -163,7 +194,7 @@
                     <div class="timeline-dot-pulse"></div>
                     <span>👕</span>
                 </div>
-                <div class="timeline-card">
+                <div class="timeline-card" data-job="poplook">
                     <div class="timeline-card-top">
                         <div class="timeline-company">
                             <span class="company-icon">👕</span>
@@ -184,6 +215,34 @@
                         <span class="fun-fact">🛠️ Production Monitoring</span>
                         <span class="fun-fact">🧹 Code Refactoring</span>
                     </div>
+                    <div class="timeline-expand-icon">▼</div>
+                    <div class="timeline-details">
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">🎯 Key Achievements</span>
+                                <ul class="detail-list">
+                                    <li>Built and maintained RESTful APIs using CodeIgniter and Laravel</li>
+                                    <li>Integrated third-party payment gateways for seamless transactions</li>
+                                    <li>Developed an internal dashboard using JavaScript, jQuery, and ReactJS</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">🛠️ System Reliability</span>
+                                <ul class="detail-list">
+                                    <li>Maintained production system stability through continuous monitoring</li>
+                                    <li>Performed code improvements, bug fixes, and refactoring</li>
+                                    <li>Optimized MySQL-backed services for better performance</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">👥 Collaboration</span>
+                                <ul class="detail-list">
+                                    <li>Worked closely with product, design, and operations teams</li>
+                                    <li>Delivered features aligned with business needs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -193,7 +252,7 @@
                     <div class="timeline-dot-pulse"></div>
                     <span>🎒</span>
                 </div>
-                <div class="timeline-card">
+                <div class="timeline-card" data-job="tadika">
                     <div class="timeline-card-top">
                         <div class="timeline-company">
                             <span class="company-icon">🎒</span>
@@ -214,6 +273,27 @@
                         <span class="fun-fact">🗄️ CodeIgniter + MySQL</span>
                         <span class="fun-fact">📆 9-Year Project</span>
                     </div>
+                    <div class="timeline-expand-icon">▼</div>
+                    <div class="timeline-details">
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">🎯 Key Achievements</span>
+                                <ul class="detail-list">
+                                    <li>Enhanced system modules with new features using CodeIgniter, MySQL, HTML, Bootstrap & PHP</li>
+                                    <li>Built features for attendance tracking and parent communications</li>
+                                    <li>Resolved application bugs and performance issues</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">🛠️ Maintenance</span>
+                                <ul class="detail-list">
+                                    <li>Provided long-term updates and improvements throughout system lifecycle</li>
+                                    <li>Managed source code using Bitbucket for version tracking</li>
+                                    <li>Sustained the system for nearly a decade (2015-2024)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -223,7 +303,7 @@
                     <div class="timeline-dot-pulse"></div>
                     <span>📦</span>
                 </div>
-                <div class="timeline-card">
+                <div class="timeline-card" data-job="inventory">
                     <div class="timeline-card-top">
                         <div class="timeline-company">
                             <span class="company-icon">📦</span>
@@ -243,6 +323,26 @@
                         <span class="fun-fact">⚙️ Backend Logic</span>
                         <span class="fun-fact">✅ System Reliability</span>
                     </div>
+                    <div class="timeline-expand-icon">▼</div>
+                    <div class="timeline-details">
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">🎯 Key Achievements</span>
+                                <ul class="detail-list">
+                                    <li>Built inventory tracking modules using CodeIgniter and MySQL</li>
+                                    <li>Tracked inventory bookings, availability, and status</li>
+                                    <li>Designed workflows for better inventory usage visibility</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">🛠️ System Stability</span>
+                                <ul class="detail-list">
+                                    <li>Supported backend development and bug fixing</li>
+                                    <li>Performed enhancements and maintenance for daily stability</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -252,7 +352,7 @@
                     <div class="timeline-dot-pulse"></div>
                     <span>👨‍💼</span>
                 </div>
-                <div class="timeline-card">
+                <div class="timeline-card" data-job="vialing">
                     <div class="timeline-card-top">
                         <div class="timeline-company">
                             <span class="company-icon">👨‍💼</span>
@@ -272,6 +372,34 @@
                         <span class="fun-fact">🏗️ Built CMS & Portals</span>
                         <span class="fun-fact">📅 Project Delivery</span>
                         <span class="fun-fact">🚀 Performance Tuning</span>
+                    </div>
+                    <div class="timeline-expand-icon">▼</div>
+                    <div class="timeline-details">
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">🎯 Key Achievements</span>
+                                <ul class="detail-list">
+                                    <li>Led project delivery and tracked progress for timely feature releases</li>
+                                    <li>Built and maintained CMS, Dashboard V1/V2, Online Application V2 & Student Portal</li>
+                                    <li>Used Laravel, CodeIgniter, MySQL, jQuery, JavaScript, and Bootstrap</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">👨‍🏫 Leadership</span>
+                                <ul class="detail-list">
+                                    <li>Mentored junior engineers to improve code quality and team capability</li>
+                                    <li>Managed and tracked project progress for on-time delivery</li>
+                                </ul>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">🛠️ System Optimization</span>
+                                <ul class="detail-list">
+                                    <li>Maintained production systems for long-term stability</li>
+                                    <li>Optimized backend processes and workflows</li>
+                                    <li>Improved overall system efficiency</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
