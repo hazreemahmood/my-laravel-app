@@ -97,7 +97,7 @@
     </div>
 
     <!-- ============================================
-         JOB EXPERIENCE TIMELINE
+         JOB EXPERIENCE - FUN CARDS
          ============================================ -->
     <div class="journey-section" id="career-journey">
         <!-- Stats bar -->
@@ -126,36 +126,34 @@
             <p>From CodeIgniter to Laravel, from intern to lead — every role, every line of code</p>
         </div>
 
-        <div class="timeline">
-            <!-- Job 1: The Makeover Guys (Current) -->
-            <div class="timeline-item">
-                <div class="timeline-dot">
-                    <div class="timeline-dot-pulse"></div>
-                    <span>⚡</span>
-                </div>
-                <div class="timeline-card" data-job="makeover-guys">
-                    <div class="timeline-card-top">
-                        <div class="timeline-company">
-                            <span class="company-icon">💅</span>
-                            The Makeover Guys
-                        </div>
-                        <div class="timeline-period">May 2025 — Present</div>
+        <!-- Job Cards -->
+        <div class="job-cards">
+
+            <!-- Job 1: The Makeover Guys -->
+            <div class="job-card" data-color="purple">
+                <div class="job-card-bar"></div>
+                <div class="job-card-inner">
+                    <div class="job-card-header">
+                        <div class="job-card-company">💅 The Makeover Guys</div>
+                        <div class="job-card-period">May 2025 — Present</div>
                     </div>
-                    <div class="timeline-role">Full Stack Developer</div>
-                    <div class="timeline-desc">
+                    <div class="job-card-role">Full Stack Developer</div>
+                    <div class="job-card-desc">
                         Architecting scalable full-stack modules, building real-time messaging features, 
                         designing modern React frontends, integrating NetSuite & Atome APIs, 
                         and shipping features from idea to production. Also secretly the team's AI-powered 
                         coding sidekick 🤖.
                     </div>
-                    <div class="timeline-fun-facts">
-                        <span class="fun-fact">⚛️ React + REST APIs</span>
-                        <span class="fun-fact">📦 NetSuite Integration</span>
-                        <span class="fun-fact">🤖 AI-Assisted Coding</span>
-                        <span class="fun-fact">🔧 System Performance</span>
+                    <div class="job-card-tags">
+                        <span class="job-tag">⚛️ React + REST APIs</span>
+                        <span class="job-tag">📦 NetSuite Integration</span>
+                        <span class="job-tag">🤖 AI-Assisted Coding</span>
+                        <span class="job-tag">🔧 System Performance</span>
                     </div>
-                    <div class="timeline-expand-icon">▼</div>
-                    <div class="timeline-details">
+                    <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
+                </div>
+                <div class="job-card-details">
+                    <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
                                 <span class="detail-label">🎯 Key Achievements</span>
@@ -189,34 +187,30 @@
             </div>
 
             <!-- Job 2: Poplook -->
-            <div class="timeline-item">
-                <div class="timeline-dot">
-                    <div class="timeline-dot-pulse"></div>
-                    <span>👕</span>
-                </div>
-                <div class="timeline-card" data-job="poplook">
-                    <div class="timeline-card-top">
-                        <div class="timeline-company">
-                            <span class="company-icon">👕</span>
-                            Poplook Sdn. Bhd.
-                        </div>
-                        <div class="timeline-period">Jun 2019 — Mar 2025</div>
+            <div class="job-card" data-color="pink">
+                <div class="job-card-bar"></div>
+                <div class="job-card-inner">
+                    <div class="job-card-header">
+                        <div class="job-card-company">👕 Poplook Sdn. Bhd.</div>
+                        <div class="job-card-period">Jun 2019 — Mar 2025</div>
                     </div>
-                    <div class="timeline-role">Senior Web Developer</div>
-                    <div class="timeline-desc">
+                    <div class="job-card-role">Senior Web Developer</div>
+                    <div class="job-card-desc">
                         Built and maintained RESTful APIs with Laravel & CodeIgniter, integrated 
                         third-party payment gateways, developed internal dashboards with ReactJS, 
                         and kept production systems running like a well-oiled machine. Nearly 6 years 
                         of keeping the fashion e-commerce engine humming 🛒.
                     </div>
-                    <div class="timeline-fun-facts">
-                        <span class="fun-fact">💳 Payment Gateway APIs</span>
-                        <span class="fun-fact">📊 Internal Dashboards</span>
-                        <span class="fun-fact">🛠️ Production Monitoring</span>
-                        <span class="fun-fact">🧹 Code Refactoring</span>
+                    <div class="job-card-tags">
+                        <span class="job-tag">💳 Payment Gateway APIs</span>
+                        <span class="job-tag">📊 Internal Dashboards</span>
+                        <span class="job-tag">🛠️ Production Monitoring</span>
+                        <span class="job-tag">🧹 Code Refactoring</span>
                     </div>
-                    <div class="timeline-expand-icon">▼</div>
-                    <div class="timeline-details">
+                    <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
+                </div>
+                <div class="job-card-details">
+                    <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
                                 <span class="detail-label">🎯 Key Achievements</span>
@@ -246,35 +240,31 @@
                 </div>
             </div>
 
-            <!-- Job 3: Tadika/Taska Management System (Freelance) -->
-            <div class="timeline-item">
-                <div class="timeline-dot">
-                    <div class="timeline-dot-pulse"></div>
-                    <span>🎒</span>
-                </div>
-                <div class="timeline-card" data-job="tadika">
-                    <div class="timeline-card-top">
-                        <div class="timeline-company">
-                            <span class="company-icon">🎒</span>
-                            Tadika/Taska Management System
-                        </div>
-                        <div class="timeline-period">May 2015 — Sep 2024</div>
+            <!-- Job 3: Tadika/Taska Management System -->
+            <div class="job-card" data-color="green">
+                <div class="job-card-bar"></div>
+                <div class="job-card-inner">
+                    <div class="job-card-header">
+                        <div class="job-card-company">🎒 Tadika/Taska Management System</div>
+                        <div class="job-card-period">May 2015 — Sep 2024</div>
                     </div>
-                    <div class="timeline-role">Freelance Developer</div>
-                    <div class="timeline-desc">
+                    <div class="job-card-role">Freelance Developer</div>
+                    <div class="job-card-desc">
                         Built and maintained a management system for kindergartens and daycare centers 
                         using CodeIgniter + MySQL. Added features, squashed bugs, and kept the system 
                         running smoothly for nearly a decade. From attendance tracking to parent 
                         communications — code that helps shape young minds 📚.
                     </div>
-                    <div class="timeline-fun-facts">
-                        <span class="fun-fact">📋 Attendance Tracking</span>
-                        <span class="fun-fact">🐛 Bug Squasher</span>
-                        <span class="fun-fact">🗄️ CodeIgniter + MySQL</span>
-                        <span class="fun-fact">📆 9-Year Project</span>
+                    <div class="job-card-tags">
+                        <span class="job-tag">📋 Attendance Tracking</span>
+                        <span class="job-tag">🐛 Bug Squasher</span>
+                        <span class="job-tag">🗄️ CodeIgniter + MySQL</span>
+                        <span class="job-tag">📆 9-Year Project</span>
                     </div>
-                    <div class="timeline-expand-icon">▼</div>
-                    <div class="timeline-details">
+                    <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
+                </div>
+                <div class="job-card-details">
+                    <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
                                 <span class="detail-label">🎯 Key Achievements</span>
@@ -297,34 +287,30 @@
                 </div>
             </div>
 
-            <!-- Job 4: Inventory Booking System (Freelance) -->
-            <div class="timeline-item">
-                <div class="timeline-dot">
-                    <div class="timeline-dot-pulse"></div>
-                    <span>📦</span>
-                </div>
-                <div class="timeline-card" data-job="inventory">
-                    <div class="timeline-card-top">
-                        <div class="timeline-company">
-                            <span class="company-icon">📦</span>
-                            Inventory Booking System
-                        </div>
-                        <div class="timeline-period">May 2015 — Sep 2024</div>
+            <!-- Job 4: Inventory Booking System -->
+            <div class="job-card" data-color="orange">
+                <div class="job-card-bar"></div>
+                <div class="job-card-inner">
+                    <div class="job-card-header">
+                        <div class="job-card-company">📦 Inventory Booking System</div>
+                        <div class="job-card-period">May 2015 — Sep 2024</div>
                     </div>
-                    <div class="timeline-role">Freelance Developer</div>
-                    <div class="timeline-desc">
+                    <div class="job-card-role">Freelance Developer</div>
+                    <div class="job-card-desc">
                         Developed inventory tracking modules to monitor bookings, availability, and status. 
                         Built workflows that gave users crystal-clear visibility into their inventory. 
                         More organized warehouses, happier clients ✅.
                     </div>
-                    <div class="timeline-fun-facts">
-                        <span class="fun-fact">📊 Inventory Tracking</span>
-                        <span class="fun-fact">🔄 Workflow Design</span>
-                        <span class="fun-fact">⚙️ Backend Logic</span>
-                        <span class="fun-fact">✅ System Reliability</span>
+                    <div class="job-card-tags">
+                        <span class="job-tag">📊 Inventory Tracking</span>
+                        <span class="job-tag">🔄 Workflow Design</span>
+                        <span class="job-tag">⚙️ Backend Logic</span>
+                        <span class="job-tag">✅ System Reliability</span>
                     </div>
-                    <div class="timeline-expand-icon">▼</div>
-                    <div class="timeline-details">
+                    <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
+                </div>
+                <div class="job-card-details">
+                    <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
                                 <span class="detail-label">🎯 Key Achievements</span>
@@ -347,34 +333,30 @@
             </div>
 
             <!-- Job 5: Vialing Sdn Bhd -->
-            <div class="timeline-item">
-                <div class="timeline-dot">
-                    <div class="timeline-dot-pulse"></div>
-                    <span>👨‍💼</span>
-                </div>
-                <div class="timeline-card" data-job="vialing">
-                    <div class="timeline-card-top">
-                        <div class="timeline-company">
-                            <span class="company-icon">👨‍💼</span>
-                            Vialing Sdn Bhd
-                        </div>
-                        <div class="timeline-period">Mar 2013 — Sep 2019</div>
+            <div class="job-card" data-color="blue">
+                <div class="job-card-bar"></div>
+                <div class="job-card-inner">
+                    <div class="job-card-header">
+                        <div class="job-card-company">👨‍💼 Vialing Sdn Bhd</div>
+                        <div class="job-card-period">Mar 2013 — Sep 2019</div>
                     </div>
-                    <div class="timeline-role">Technical Lead</div>
-                    <div class="timeline-desc">
+                    <div class="job-card-role">Technical Lead</div>
+                    <div class="job-card-desc">
                         Led project delivery, mentored junior engineers, and built major platforms 
                         (CMS, Dashboard, Student Portal) using Laravel, CodeIgniter, and jQuery. 
                         Where the leadership journey began — managing teams, shipping products, 
                         and leveling up everyone around me 🏗️.
                     </div>
-                    <div class="timeline-fun-facts">
-                        <span class="fun-fact">👨‍🏫 Mentored Juniors</span>
-                        <span class="fun-fact">🏗️ Built CMS & Portals</span>
-                        <span class="fun-fact">📅 Project Delivery</span>
-                        <span class="fun-fact">🚀 Performance Tuning</span>
+                    <div class="job-card-tags">
+                        <span class="job-tag">👨‍🏫 Mentored Juniors</span>
+                        <span class="job-tag">🏗️ Built CMS & Portals</span>
+                        <span class="job-tag">📅 Project Delivery</span>
+                        <span class="job-tag">🚀 Performance Tuning</span>
                     </div>
-                    <div class="timeline-expand-icon">▼</div>
-                    <div class="timeline-details">
+                    <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
+                </div>
+                <div class="job-card-details">
+                    <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
                                 <span class="detail-label">🎯 Key Achievements</span>
@@ -403,6 +385,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 

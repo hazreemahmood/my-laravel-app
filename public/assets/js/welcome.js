@@ -62,7 +62,6 @@
             }
         }
 
-        // Start typing effect after 1 second delay
         setTimeout(typeEffect, 1000);
     }
 
@@ -82,51 +81,31 @@
     }
 
     // ========================================
-    // Timeline Card Expand/Collapse
+    // Job Card Expand/Collapse (Accordion)
     // ========================================
-    const timelineCards = document.querySelectorAll('.timeline-card');
+    const jobCards = document.querySelectorAll('.job-card');
 
-    timelineCards.forEach(function(card) {
-        // Add click hint if details exist
-        const details = card.querySelector('.timeline-details');
-        if (details) {
-            const hint = document.createElement('div');
-            hint.className = 'click-hint';
-            hint.textContent = 'Click to explore';
-            card.appendChild(hint);
+    jobCards.forEach(function(card) {
+        card.addEventListener('click', function(e) {
+            // Don't toggle if clicking a tag badge
+            if (e.target.closest('.job-tag')) return;
 
-            // Click to toggle
-            card.addEventListener('click', function(e) {
-                // Don't toggle if clicking a fun-fact tag
-                if (e.target.closest('.fun-fact')) return;
-
-                const isActive = card.classList.contains('active');
-                
-                // Close all other cards first (accordion behavior)
-                timelineCards.forEach(function(otherCard) {
-                    if (otherCard !== card) {
-                        otherCard.classList.remove('active');
-                    }
-                });
-
-                // Toggle this one
-                if (!isActive) {
-                    card.classList.add('active');
-                } else {
-                    card.classList.remove('active');
+            const isActive = card.classList.contains('active');
+            
+            // Close all other cards (accordion)
+            jobCards.forEach(function(otherCard) {
+                if (otherCard !== card) {
+                    otherCard.classList.remove('active');
                 }
             });
-        }
-    });
 
-    // ========================================
-    // Smooth scroll to timeline from hero
-    // ========================================
-    // If user arrives from an anchor link
-    if (window.location.hash === '#career-journey') {
-        setTimeout(function() {
-            document.getElementById('career-journey').scrollIntoView({ behavior: 'smooth' });
-        }, 500);
-    }
+            // Toggle clicked card
+            if (isActive) {
+                card.classList.remove('active');
+            } else {
+                card.classList.add('active');
+            }
+        });
+    });
 
 })();
