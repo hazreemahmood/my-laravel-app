@@ -78,7 +78,7 @@ jobs:
             cd /var/www/html/my-laravel-app
             git pull origin main
               php artisan optimize:clear
-              php artisan migrate
+              php artisan migrate --seeder --force
 
       # Send Discord notification on deployment success
       - name: Discord notification - Deployment success
