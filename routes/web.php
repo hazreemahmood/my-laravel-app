@@ -23,12 +23,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public routes
+Route::get('/', function () {
+    return view('welcome');
+});
 Route::get('/welcome', function () {
     return view('welcome');
 });
 
 // Guest routes
-Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
 Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
