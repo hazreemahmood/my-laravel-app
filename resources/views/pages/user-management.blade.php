@@ -57,14 +57,14 @@
                                     </td>
                                     <td class="align-middle text-end">
                                         <div class="d-flex px-3 py-1 justify-content-center align-items-center gap-3">
-                                            <a href="{{ route('user-management.edit', $user->id) }}" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="tooltip" title="Edit user">
-                                                <i class="fas fa-pencil-alt text-sm me-1"></i> Edit
+                                            <a href="{{ route('profile', $user->id) }}" class="text-primary" data-bs-toggle="tooltip" title="Edit user">
+                                                <i class="fas fa-pencil-alt text-lg"></i>
                                             </a>
                                             <form method="POST" action="{{ route('user-management.destroy', $user->id) }}" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger btn-sm mb-0" data-bs-toggle="tooltip" title="Delete user">
-                                                    <i class="fas fa-trash-alt text-sm me-1"></i> Delete
+                                                <button type="submit" class="btn btn-link text-danger p-0 border-0 bg-transparent" data-bs-toggle="tooltip" title="Delete user">
+                                                    <i class="fas fa-trash-alt text-lg"></i>
                                                 </button>
                                             </form>
                                         </div>

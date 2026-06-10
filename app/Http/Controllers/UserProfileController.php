@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
 class UserProfileController extends Controller
 {
-    public function show()
+    public function show($id = null)
     {
-        return view('pages.user-profile');
+        $user = $id ? User::findOrFail($id) : auth()->user();
+        return view('pages.user-profile', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id = null)
     {
+        $user = $id ? User::findOrFail($id) : auth()->user();
+
         $attributes = $request->validate([
             'username' => ['required','max:255', 'min:2'],
             'firstname' => ['max:100'],
             'lastname' => ['max:100'],
-            'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
+            'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore($user->id)],
             'address' => ['max:100'],
             'city' => ['max:100'],
             'country' => ['max:100'],
@@ -26,17 +30,18 @@ class UserProfileController extends Controller
             'about' => ['max:255']
         ]);
 
-        auth()->user()->update([
+        $user->update([
             'username' => $request->get('username'),
             'firstname' => $request->get('firstname'),
             'lastname' => $request->get('lastname'),
-            'email' => $request->get('email') ,
+            'email' => $request->get('email'),
             'address' => $request->get('address'),
             'city' => $request->get('city'),
             'country' => $request->get('country'),
             'postal' => $request->get('postal'),
             'about' => $request->get('about')
         ]);
-        return back()->with('succes', 'Profile succesfully updated');
+
+        return back()->with('succes', 'Profile successfully updated');
     }
 }
