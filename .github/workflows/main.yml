@@ -52,8 +52,8 @@ jobs:
       - name: Configure Git SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa_cicd
+          chmod 600 ~/.ssh/id_rsa_cicd
           ssh-keyscan github.com >> ~/.ssh/known_hosts
         # Add deployment commands here (e.g., SSH into server, deploy scripts, etc.)
       - name: Deploy via SSH
@@ -64,7 +64,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           #passphrase: 1234
-          #fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+          # fingerprint: ${{ secrets.SSH_FINGERPRINT }}
           #git remote set-url origin git@github.com:hazreemahmood/my-laravel-app.git
             #ssh -T git@github.com
             #passphrase: 12345
@@ -74,7 +74,7 @@ jobs:
             #inside script
           script: |
             eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/id_rsa
+            ssh-add ~/.ssh/id_rsa_cicd
             cd /var/www/html/my-laravel-app
             git pull origin main
             php artisan optimize:clear
