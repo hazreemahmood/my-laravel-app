@@ -56,7 +56,7 @@
                                         <p class="text-sm font-weight-bold mb-0">{{ $user->created_at ? $user->created_at->format('d/m/Y') : 'N/A' }}</p>
                                     </td>
                                     <td class="align-middle text-end">
-                                        <div class="d-flex px-3 py-1 justify-content-center align-items-center gap-3">
+                                        <div class="d-flex px-3 py-1 justify-content-center gap-3">
                                             <a href="{{ route('profile', $user->id) }}" class="text-primary" data-bs-toggle="tooltip" title="Edit user">
                                                 <i class="fas fa-pencil-alt text-sm me-1"></i>
                                             </a>
