@@ -12,7 +12,6 @@
                             <i class="ni ni-camera-compact"></i>
                             <span>Change Photo</span>
                         </div>
-                        <input type="file" name="photo" accept="image/*" class="d-none" id="photoInput">
                     </div>
                 </div>
                 <div class="col-auto my-auto">
@@ -62,7 +61,7 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <form role="form" method="POST" action="{{ $user->id !== auth()->id() ? route('profile.update', $user->id) : route('profile.update') }}" enctype="multipart/form-data">
+                    <form id="profileForm" role="form" method="POST" action="{{ $user->id !== auth()->id() ? route('profile.update', $user->id) : route('profile.update') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
@@ -139,6 +138,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="file" name="photo" accept="image/*" class="d-none" id="photoInput">
                     </form>
                 </div>
             </div>
@@ -241,7 +241,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const avatarUpload = document.getElementById('avatarUpload');
         const photoInput = document.getElementById('photoInput');
-        const profileForm = document.querySelector('.card form');
+        const profileForm = document.getElementById('profileForm');
 
         if (avatarUpload && photoInput) {
             avatarUpload.addEventListener('click', function() {
