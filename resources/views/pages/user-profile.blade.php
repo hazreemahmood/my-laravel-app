@@ -10,7 +10,6 @@
                         <img src="{{ $user->photo ? asset('uploads/avatars/' . $user->photo) : '/img/team-1.jpg' }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                         <div class="avatar-overlay">
                             <i class="ni ni-camera-compact"></i>
-                            <span>Change Photo</span>
                         </div>
                     </div>
                 </div>
