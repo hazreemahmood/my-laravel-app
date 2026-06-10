@@ -18,16 +18,44 @@
                 </div>
             </div>
             <ul class="navbar-nav  justify-content-end">
-                <li class="nav-item d-flex align-items-center">
+                <li class="nav-item dropdown d-flex align-items-center">
                     <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
                         @csrf
-                        <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="nav-link text-white font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
-                            <span class="d-sm-inline d-none">Log out</span>
-                        </a>
                     </form>
+                    <a href="javascript:;" class="nav-link text-white font-weight-bold px-0 d-flex align-items-center" 
+                       id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ auth()->user()->photo ? asset('uploads/avatars/' . auth()->user()->photo) : '/img/team-2.jpg' }}" 
+                             class="avatar avatar-xs rounded-circle me-2" alt="user">
+                        <span class="d-sm-inline d-none me-1">{{ auth()->user()->username ?? 'User' }}</span>
+                        <i class="fa fa-chevron-down text-xs"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="userDropdown">
+                        <li class="mb-2">
+                            <a class="dropdown-item border-radius-md" href="{{ route('profile') }}">
+                                <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                        <i class="fa fa-user-circle me-2"></i>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="text-sm font-weight-normal mb-0">Profile</h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item border-radius-md" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                        <i class="fa fa-sign-out-alt me-2"></i>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="text-sm font-weight-normal mb-0">Log out</h6>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
