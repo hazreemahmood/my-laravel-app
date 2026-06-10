@@ -6,7 +6,7 @@
         <a class="navbar-brand m-0" href="{{ route('home') }}"
             target="_blank">
             <img src="./img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">Argon Dashboard 2 Laravel weeee</span>
+            <span class="ms-1 font-weight-bold">Argon Dashboard 2 Laravel</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -18,7 +18,7 @@
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
+                    <span class="nav-link-text ms-1">Dashboard wei</span>
                 </a>
             </li>
             <li class="nav-item mt-3 d-flex align-items-center">
@@ -54,24 +54,6 @@
                         <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Ai Integration</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'gallery' ? 'active' : '' }}" href="{{ route('gallery') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-image text-info text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Image Gallery</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('gallery') }}?upload=1">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-camera-compact text-success text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Upload Image</span>
                 </a>
             </li>
             <li class="nav-item">
