@@ -80,7 +80,6 @@ jobs:
               php artisan optimize:clear
               php artisan migrate
               php artisan db:seed --force
-
       # Send Discord notification on deployment success
       - name: Discord notification - Deployment success
         if: success()
