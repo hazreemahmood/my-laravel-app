@@ -18,7 +18,7 @@
                 </div>
             </div>
             <ul class="navbar-nav  justify-content-end">
-                <li class="nav-item dropdown d-flex align-items-center bg-white rounded-3 px-2">
+                <li class="nav-item dropdown d-flex align-items-center rounded-3 px-2">
                     <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
                         @csrf
                     </form>
