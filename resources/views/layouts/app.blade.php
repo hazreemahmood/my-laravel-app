@@ -24,7 +24,7 @@
     @stack('css')
 </head>
 
-<body class="{{ $class ?? 'g-sidenav-show bg-gray-100' }}">
+<body class="{{ $class ?? 'g-sidenav-show' }}">
     @auth
     <script>
         // Apply dark mode class immediately to prevent flash
