@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-// use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Notifications\NewUserRegistered;
+use Illuminate\Support\Facades\Notification;
 
 class RegisterController extends Controller
 {
@@ -22,6 +23,12 @@ class RegisterController extends Controller
         ]);
         $user = User::create($attributes);
         auth()->login($user);
+
+        // Notify all admin users about the new registration
+        $admins = User::where('role', 'admin')->get();
+        if ($admins->isNotEmpty()) {
+            Notification::send($admins, new NewUserRegistered($user));
+        }
 
         return redirect('/dashboard');
     }

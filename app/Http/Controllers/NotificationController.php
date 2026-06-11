@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class NotificationController extends Controller
+{
+    public function index()
+    {
+        $notifications = auth()->user()->notifications()->latest()->take(10)->get();
+        $unreadCount = auth()->user()->unreadNotifications()->count();
+
+        return response()->json([
+            'notifications' => $notifications,
+            'unread_count' => $unreadCount,
+        ]);
+    }
+
+    public function markAsRead($id)
+    {
+        $notification = auth()->user()->notifications()->findOrFail($id);
+        $notification->markAsRead();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function markAllAsRead()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+
+        return response()->json(['success' => true]);
+    }
+}

@@ -10,19 +10,19 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Money</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Users</p>
                                     <h5 class="font-weight-bolder">
-                                        $53,000
+                                        {{ number_format($stats['users']) }}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                        since yesterday
+                                        <span class="text-success text-sm font-weight-bolder">+{{ $stats['usersThisWeek'] }}</span>
+                                        this week
                                     </p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                    <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -35,13 +35,13 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Page Views</p>
                                     <h5 class="font-weight-bolder">
-                                        2,300
+                                        {{ number_format($stats['pageViews']) }}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                        since last week
+                                        <span class="text-success text-sm font-weight-bolder">{{ $stats['viewsToday'] }}</span>
+                                        today
                                     </p>
                                 </div>
                             </div>
@@ -60,19 +60,19 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Messages</p>
                                     <h5 class="font-weight-bolder">
-                                        +3,462
+                                        {{ number_format($stats['messages']) }}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                        since last quarter
+                                        <span class="text-success text-sm font-weight-bolder">+{{ $stats['messagesThisWeek'] }}</span>
+                                        this week
                                     </p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                    <i class="ni ni-email-83 text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -85,18 +85,19 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Media Uploads</p>
                                     <h5 class="font-weight-bolder">
-                                        $103,430
+                                        {{ number_format($stats['media']) }}
                                     </h5>
                                     <p class="mb-0">
-                                        <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
+                                        <span class="text-success text-sm font-weight-bolder">+{{ $stats['mediaThisMonth'] }}</span>
+                                        this month
                                     </p>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                    <i class="ni ni-image text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -108,10 +109,10 @@
             <div class="col-lg-7 mb-lg-0 mb-4">
                 <div class="card z-index-2 h-100">
                     <div class="card-header pb-0 pt-3 bg-transparent">
-                        <h6 class="text-capitalize">Sales overview</h6>
+                        <h6 class="text-capitalize">Page Views (Last 7 Days)</h6>
                         <p class="text-sm mb-0">
                             <i class="fa fa-arrow-up text-success"></i>
-                            <span class="font-weight-bold">4% more</span> in 2021
+                            <span class="font-weight-bold">{{ $stats['viewsToday'] }}</span> views today
                         </p>
                     </div>
                     <div class="card-body p-3">
@@ -405,11 +406,11 @@
         gradientStroke1.addColorStop(0.2, 'rgba(251, 99, 64, 0.0)');
         gradientStroke1.addColorStop(0, 'rgba(251, 99, 64, 0)');
         new Chart(ctx1, {
-            type: "line",
+            type: "bar",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: {!! json_encode($chartLabels) !!},
                 datasets: [{
-                    label: "Mobile apps",
+                    label: "Page Views",
                     tension: 0.4,
                     borderWidth: 0,
                     pointRadius: 0,
@@ -417,8 +418,8 @@
                     backgroundColor: gradientStroke1,
                     borderWidth: 3,
                     fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                    maxBarThickness: 6
+                    data: {!! json_encode($chartData) !!},
+                    maxBarThickness: 30
 
                 }],
             },
