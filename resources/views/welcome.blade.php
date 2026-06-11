@@ -15,66 +15,66 @@
 <body>
     <!-- Background -->
     <div class="bg-grid"></div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+    <div class="orb orb-1" data-orb></div>
+    <div class="orb orb-2" data-orb></div>
+    <div class="orb orb-3" data-orb></div>
 
     <div class="hero">
         <!-- Logo with pulse -->
-        <div class="logo-wrapper">
-            <div class="logo-pulse"></div>
-            <div class="logo-pulse"></div>
-            <div class="logo-circle">H</div>
+        <div class="logo-wrapper" data-animate="logo">
+            <div class="logo-pulse" data-logo-pulse></div>
+            <div class="logo-pulse" data-logo-pulse></div>
+            <div class="logo-circle" data-logo-circle>H</div>
         </div>
 
         <!-- Main title -->
-        <h1>Welcome to Hazree Website</h1>
+        <h1 data-animate="title">Welcome to Hazree Website</h1>
 
         <!-- Typing effect subtitle -->
-        <div class="typing-wrapper">
+        <div class="typing-wrapper" data-animate="typing">
             <span class="highlight">Full Stack Developer</span>
             <span id="typing-text"></span>
             <span class="cursor"></span>
         </div>
 
-        <div class="divider"></div>
+        <div class="divider" data-animate="divider"></div>
 
-        <p class="tagline">
+        <p class="tagline" data-animate="tagline">
             <span id="dynamic-tagline">10+ years of experience building scalable web applications</span>
         </p>
 
         <!-- Action buttons -->
-        <div class="btn-group">
+        <div class="btn-group" data-animate="buttons">
             @if (Route::has('login'))
                 @auth
-                    <a href="{{ url('/dashboard') }}" class="btn btn-primary">Dashboard</a>
+                    <a href="{{ url('/dashboard') }}" class="btn btn-primary" data-btn>Dashboard</a>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-primary">Get Started</a>
+                    <a href="{{ route('login') }}" class="btn btn-primary" data-btn>Get Started</a>
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="btn btn-secondary">Create Account</a>
+                        <a href="{{ route('register') }}" class="btn btn-secondary" data-btn>Create Account</a>
                     @endif
                 @endauth
             @endif
         </div>
 
         <!-- Resume highlights -->
-        <div class="highlights">
-            <div class="highlight-card">
+        <div class="highlights" data-animate="highlights">
+            <div class="highlight-card" data-highlight>
                 <div class="highlight-icon">💻</div>
                 <div class="highlight-number">10+</div>
                 <div class="highlight-label">Years of Experience</div>
             </div>
-            <div class="highlight-card">
+            <div class="highlight-card" data-highlight>
                 <div class="highlight-icon">🚀</div>
                 <div class="highlight-number">PHP</div>
                 <div class="highlight-label">Laravel · CodeIgniter</div>
             </div>
-            <div class="highlight-card">
+            <div class="highlight-card" data-highlight>
                 <div class="highlight-icon">⚛️</div>
                 <div class="highlight-number">React</div>
                 <div class="highlight-label">JavaScript · REST APIs</div>
             </div>
-            <div class="highlight-card">
+            <div class="highlight-card" data-highlight>
                 <div class="highlight-icon">🛢️</div>
                 <div class="highlight-number">MySQL</div>
                 <div class="highlight-label">Database · Performance</div>
@@ -82,55 +82,55 @@
         </div>
 
         <!-- Skills strip -->
-        <div class="skills-strip">
-            <span class="skill-tag">Laravel</span>
-            <span class="skill-tag">CodeIgniter</span>
-            <span class="skill-tag">ReactJS</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">RESTful APIs</span>
-            <span class="skill-tag">Docker</span>
-            <span class="skill-tag">CI/CD</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">jQuery</span>
+        <div class="skills-strip" data-animate="skills">
+            <span class="skill-tag" data-skill>Laravel</span>
+            <span class="skill-tag" data-skill>CodeIgniter</span>
+            <span class="skill-tag" data-skill>ReactJS</span>
+            <span class="skill-tag" data-skill>JavaScript</span>
+            <span class="skill-tag" data-skill>MySQL</span>
+            <span class="skill-tag" data-skill>RESTful APIs</span>
+            <span class="skill-tag" data-skill>Docker</span>
+            <span class="skill-tag" data-skill>CI/CD</span>
+            <span class="skill-tag" data-skill>Git</span>
+            <span class="skill-tag" data-skill>jQuery</span>
         </div>
     </div>
 
     <!-- ============================================
          JOB EXPERIENCE - FUN CARDS
          ============================================ -->
-    <div class="journey-section" id="career-journey">
+    <div class="journey-section" id="career-journey" data-animate="journey">
         <!-- Stats bar -->
-        <div class="job-stats">
-            <div class="job-stat">
-                <div class="job-stat-number">10+</div>
+        <div class="job-stats" data-scroll="stats">
+            <div class="job-stat" data-stat>
+                <div class="job-stat-number" data-stat-target="10+">0</div>
                 <div class="job-stat-label">Years Building</div>
             </div>
-            <div class="job-stat">
-                <div class="job-stat-number">5</div>
+            <div class="job-stat" data-stat>
+                <div class="job-stat-number" data-stat-target="5">0</div>
                 <div class="job-stat-label">Companies Leveled Up</div>
             </div>
-            <div class="job-stat">
-                <div class="job-stat-number">∞</div>
+            <div class="job-stat" data-stat>
+                <div class="job-stat-number" data-stat-target="∞">0</div>
                 <div class="job-stat-label">Bugs Squashed</div>
             </div>
-            <div class="job-stat">
-                <div class="job-stat-number">🚀</div>
+            <div class="job-stat" data-stat>
+                <div class="job-stat-number" data-stat-target="🚀">0</div>
                 <div class="job-stat-label">Ships Launched</div>
             </div>
         </div>
 
-        <div class="journey-header">
+        <div class="journey-header" data-scroll="journey-header">
             <div class="journey-badge">🏆 Career Timeline</div>
             <h2>The <span>Journey</span> So Far</h2>
             <p>From CodeIgniter to Laravel, from intern to lead — every role, every line of code</p>
         </div>
 
         <!-- Job Cards -->
-        <div class="job-cards">
+        <div class="job-cards" data-scroll="job-cards">
 
             <!-- Job 1: The Makeover Guys -->
-            <div class="job-card" data-color="purple">
+            <div class="job-card" data-color="purple" data-job-card>
                 <div class="job-card-bar"></div>
                 <div class="job-card-inner">
                     <div class="job-card-header">
@@ -152,7 +152,7 @@
                     </div>
                     <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
                 </div>
-                <div class="job-card-details">
+                <div class="job-card-details" data-card-details>
                     <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
@@ -187,7 +187,7 @@
             </div>
 
             <!-- Job 2: Poplook -->
-            <div class="job-card" data-color="pink">
+            <div class="job-card" data-color="pink" data-job-card>
                 <div class="job-card-bar"></div>
                 <div class="job-card-inner">
                     <div class="job-card-header">
@@ -209,7 +209,7 @@
                     </div>
                     <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
                 </div>
-                <div class="job-card-details">
+                <div class="job-card-details" data-card-details>
                     <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
@@ -241,7 +241,7 @@
             </div>
 
             <!-- Job 3: Tadika/Taska Management System -->
-            <div class="job-card" data-color="green">
+            <div class="job-card" data-color="green" data-job-card>
                 <div class="job-card-bar"></div>
                 <div class="job-card-inner">
                     <div class="job-card-header">
@@ -263,7 +263,7 @@
                     </div>
                     <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
                 </div>
-                <div class="job-card-details">
+                <div class="job-card-details" data-card-details>
                     <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
@@ -288,7 +288,7 @@
             </div>
 
             <!-- Job 4: Inventory Booking System -->
-            <div class="job-card" data-color="orange">
+            <div class="job-card" data-color="orange" data-job-card>
                 <div class="job-card-bar"></div>
                 <div class="job-card-inner">
                     <div class="job-card-header">
@@ -309,7 +309,7 @@
                     </div>
                     <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
                 </div>
-                <div class="job-card-details">
+                <div class="job-card-details" data-card-details>
                     <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
@@ -333,7 +333,7 @@
             </div>
 
             <!-- Job 5: Vialing Sdn Bhd -->
-            <div class="job-card" data-color="blue">
+            <div class="job-card" data-color="blue" data-job-card>
                 <div class="job-card-bar"></div>
                 <div class="job-card-inner">
                     <div class="job-card-header">
@@ -355,7 +355,7 @@
                     </div>
                     <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
                 </div>
-                <div class="job-card-details">
+                <div class="job-card-details" data-card-details>
                     <div class="job-card-details-inner">
                         <div class="details-grid">
                             <div class="detail-item">
@@ -390,6 +390,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
     <script src="{{ asset('assets/js/welcome.js') }}"></script>
 </body>
 </html>

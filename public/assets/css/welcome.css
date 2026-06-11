@@ -31,13 +31,13 @@ body {
     z-index: 0;
 }
 
-/* Floating gradient orbs */
+/* Floating gradient orbs - positioning only, animation by Anime.js */
 .orb {
     position: fixed;
     border-radius: 50%;
     filter: blur(80px);
     z-index: 0;
-    animation: orbFloat 8s ease-in-out infinite;
+    will-change: transform, opacity;
 }
 .orb-1 {
     width: 400px;
@@ -52,7 +52,6 @@ body {
     background: rgba(118, 75, 162, 0.12);
     bottom: -80px;
     right: -80px;
-    animation-delay: 3s;
 }
 .orb-3 {
     width: 250px;
@@ -60,13 +59,6 @@ body {
     background: rgba(255, 107, 107, 0.08);
     top: 50%;
     left: 60%;
-    animation-delay: 5s;
-}
-
-@keyframes orbFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -30px) scale(1.05); }
-    66% { transform: translate(-20px, 20px) scale(0.95); }
 }
 
 /* Main hero container */
@@ -82,11 +74,13 @@ body {
     text-align: center;
 }
 
-/* Pulse circle behind logo */
+/* Logo wrapper and circle */
 .logo-wrapper {
     position: relative;
     margin-bottom: 2rem;
 }
+
+/* Pulse ring behind logo - initial invisible, Anime.js handles */
 .logo-pulse {
     position: absolute;
     top: 50%;
@@ -96,14 +90,6 @@ body {
     height: 100px;
     border-radius: 50%;
     border: 2px solid rgba(102, 126, 234, 0.3);
-    animation: pulseRing 2s ease-out infinite;
-}
-.logo-pulse:nth-child(2) {
-    animation-delay: 1s;
-}
-@keyframes pulseRing {
-    0% { width: 100px; height: 100px; opacity: 1; }
-    100% { width: 160px; height: 160px; opacity: 0; }
 }
 
 .logo-circle {
@@ -120,11 +106,6 @@ body {
     font-weight: 800;
     color: #fff;
     box-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-    animation: logoGlow 3s ease-in-out infinite;
-}
-@keyframes logoGlow {
-    0%, 100% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.3); }
-    50% { box-shadow: 0 0 60px rgba(102, 126, 234, 0.5); }
 }
 
 /* Main title */
@@ -157,11 +138,7 @@ body {
     height: 1.3rem;
     background: #a8b4ff;
     margin-left: 4px;
-    animation: blink 1s step-end infinite;
     vertical-align: text-bottom;
-}
-@keyframes blink {
-    50% { opacity: 0; }
 }
 
 /* Subtitle */
@@ -188,10 +165,11 @@ body {
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .btn-primary {
@@ -232,7 +210,6 @@ body {
     border-radius: 16px;
     padding: 1.5rem 1rem;
     backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
     cursor: default;
 }
 .highlight-card:hover {
@@ -283,7 +260,7 @@ body {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+    cursor: default;
 }
 .skill-tag:hover {
     background: rgba(102, 126, 234, 0.15);
@@ -412,14 +389,10 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.08);
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.3s ease;
     position: relative;
-}
-
-.job-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
-    transform: translateY(-2px);
+    opacity: 0;
+    transform: translateX(-30px);
+    will-change: transform, opacity;
 }
 
 /* Colorful top bar per job */
@@ -495,7 +468,6 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: rgba(255, 255, 255, 0.6);
-    transition: all 0.3s ease;
     cursor: default;
 }
 
@@ -518,7 +490,6 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 600;
-    transition: all 0.3s ease;
     pointer-events: none;
 }
 
@@ -535,17 +506,11 @@ body {
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* Expandable details */
+/* Expandable details - height managed by Anime.js */
 .job-card-details {
-    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.4s ease;
+    height: 0;
     opacity: 0;
-}
-
-.job-card.active .job-card-details {
-    max-height: 600px;
-    opacity: 1;
 }
 
 .job-card-details-inner {
@@ -600,26 +565,34 @@ body {
     top: 3px;
 }
 
-/* Bounce animation on cards */
-@keyframes cardPop {
-    0% { opacity: 0; transform: translateY(30px) scale(0.97); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.job-card {
-    animation: cardPop 0.5s ease-out backwards;
-}
-
-.job-card:nth-child(1) { animation-delay: 0.05s; }
-.job-card:nth-child(2) { animation-delay: 0.15s; }
-.job-card:nth-child(3) { animation-delay: 0.25s; }
-.job-card:nth-child(4) { animation-delay: 0.35s; }
-.job-card:nth-child(5) { animation-delay: 0.45s; }
-
-/* Colorful glow on active card */
+/* Active card glow */
 .job-card.active {
     border-color: rgba(102, 126, 234, 0.3);
     box-shadow: 0 0 30px rgba(102, 126, 234, 0.08);
+}
+
+/* ========================================
+   Scroll-trigger initial states (hidden)
+   ======================================== */
+[data-scroll] {
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: transform, opacity;
+}
+
+[data-animate="highlights"] [data-highlight] {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+}
+
+[data-animate="skills"] [data-skill] {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+[data-animate="journey"] [data-scroll] {
+    opacity: 0;
+    transform: translateY(30px);
 }
 
 /* ========================================
