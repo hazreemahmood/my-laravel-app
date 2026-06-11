@@ -13,6 +13,19 @@
     <link href="{{ asset('assets/css/welcome.css') }}" rel="stylesheet" />
 </head>
 <body>
+    <!-- ============================================
+         LOADER / SPLASH SCREEN
+         ============================================ -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="loader-logo" data-loader-logo>H</div>
+            <div class="loader-text" data-loader-text>Hazree</div>
+            <div class="loader-bar" data-loader-bar>
+                <div class="loader-bar-fill" data-loader-fill></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Background -->
     <div class="bg-grid"></div>
     <div class="orb orb-1" data-orb></div>
@@ -97,7 +110,7 @@
     </div>
 
     <!-- ============================================
-         JOB EXPERIENCE - FUN CARDS
+         JOB EXPERIENCE - VERTICAL TIMELINE
          ============================================ -->
     <div class="journey-section" id="career-journey" data-animate="journey">
         <!-- Stats bar -->
@@ -126,8 +139,10 @@
             <p>From CodeIgniter to Laravel, from intern to lead — every role, every line of code</p>
         </div>
 
-        <!-- Job Cards -->
-        <div class="job-cards" data-scroll="job-cards">
+        <!-- Timeline -->
+        <div class="timeline" data-scroll="job-cards">
+            <div class="timeline-line" data-timeline-line></div>
+
 
             <!-- Job 1: The Makeover Guys -->
             <div class="job-card" data-color="purple" data-job-card>

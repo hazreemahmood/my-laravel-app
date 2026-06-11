@@ -17,6 +17,73 @@ body {
     color: #ffffff;
 }
 
+/* ========================================
+   Loader / Splash Screen
+   ======================================== */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0f0f1a;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.loader-logo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+    will-change: transform, opacity;
+}
+
+.loader-text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    will-change: transform, opacity;
+}
+
+.loader-bar {
+    width: 160px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    will-change: opacity;
+}
+
+.loader-bar-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #c084fc);
+    border-radius: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    will-change: transform;
+}
+
 /* Animated background grid */
 .bg-grid {
     position: fixed;
@@ -61,7 +128,7 @@ body {
     left: 60%;
 }
 
-/* Main hero container */
+/* Main hero container - all animated children start hidden via CSS */
 .hero {
     position: relative;
     z-index: 1;
@@ -72,6 +139,47 @@ body {
     justify-content: center;
     padding: 2rem;
     text-align: center;
+}
+
+/* Hero animated elements - hidden until JS animates them */
+[data-animate="logo"] [data-logo-circle] {
+    opacity: 0;
+    transform: scale(0.2) rotate(-180deg);
+}
+
+/* Title hidden until JS replaces text with animatable letter spans */
+[data-animate="title"] {
+    opacity: 0;
+}
+
+[data-animate="typing"] {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+[data-animate="divider"] {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+[data-animate="tagline"] {
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+[data-animate="buttons"] [data-btn] {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+[data-animate="highlights"] [data-highlight] {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+}
+
+[data-animate="skills"] [data-skill] {
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 /* Logo wrapper and circle */
@@ -284,7 +392,7 @@ body {
 
 .journey-section {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 0 1.5rem;
     margin: 4rem auto 2rem;
 }
@@ -325,6 +433,85 @@ body {
 .journey-header p {
     color: rgba(255, 255, 255, 0.6);
     font-size: 1.05rem;
+}
+
+/* Timeline container */
+.timeline {
+    position: relative;
+    padding: 1rem 0;
+}
+
+/* Vertical timeline line on the left */
+.timeline-line {
+    position: absolute;
+    left: 2.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.1), rgba(192, 132, 252, 0.4), rgba(102, 126, 234, 0.1));
+    will-change: transform;
+    opacity: 0.5;
+}
+
+/* Timeline dot on each job card */
+.job-card {
+    position: relative;
+    width: calc(100% - 5rem);
+    margin: 2rem 0 2rem 4rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* Timeline dot connector on the left for all cards */
+.job-card::before {
+    content: '';
+    position: absolute;
+    top: 2rem;
+    left: -2.6rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(102, 126, 234, 0.5);
+    background: #0f0f1a;
+    z-index: 2;
+    transition: all 0.4s ease;
+}
+
+.job-card:hover::before {
+    background: #667eea;
+    border-color: #667eea;
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Colorful left border per job */
+.job-card[data-color="purple"] { border-left: 3px solid #667eea; }
+.job-card[data-color="pink"] { border-left: 3px solid #f093fb; }
+.job-card[data-color="green"] { border-left: 3px solid #4facfe; }
+.job-card[data-color="orange"] { border-left: 3px solid #fa709a; }
+.job-card[data-color="blue"] { border-left: 3px solid #a18cd1; }
+
+/* Remove old top bar */
+.job-card-bar { display: none; }
+
+/* Timeline responsive */
+@media (max-width: 768px) {
+    .timeline-line { left: 20px; }
+    .job-card {
+        width: calc(100% - 3rem);
+        margin-left: 3rem !important;
+        margin-right: 0 !important;
+    }
+    .job-card::before {
+        left: -26px !important;
+        right: auto !important;
+        width: 10px;
+        height: 10px;
+    }
 }
 
 /* Job stats row */
@@ -373,40 +560,8 @@ body {
 }
 
 /* ========================================
-   Fun Job Cards (No timeline line)
-   More readable card-based layout
+   Timeline Card Inner Layout (shared)
    ======================================== */
-
-.job-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1.8rem;
-}
-
-.job-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    overflow: hidden;
-    cursor: pointer;
-    position: relative;
-    opacity: 0;
-    transform: translateX(-30px);
-    will-change: transform, opacity;
-}
-
-/* Colorful top bar per job */
-.job-card-bar {
-    height: 5px;
-    width: 100%;
-    border-radius: 20px 20px 0 0;
-}
-
-.job-card[data-color="purple"] .job-card-bar { background: linear-gradient(90deg, #667eea, #764ba2); }
-.job-card[data-color="pink"] .job-card-bar { background: linear-gradient(90deg, #f093fb, #f5576c); }
-.job-card[data-color="green"] .job-card-bar { background: linear-gradient(90deg, #4facfe, #00f2fe); }
-.job-card[data-color="orange"] .job-card-bar { background: linear-gradient(90deg, #fa709a, #fee140); }
-.job-card[data-color="blue"] .job-card-bar { background: linear-gradient(90deg, #a18cd1, #fbc2eb); }
 
 /* Card inner */
 .job-card-inner {
@@ -580,16 +735,6 @@ body {
     will-change: transform, opacity;
 }
 
-[data-animate="highlights"] [data-highlight] {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-}
-
-[data-animate="skills"] [data-skill] {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
 [data-animate="journey"] [data-scroll] {
     opacity: 0;
     transform: translateY(30px);
@@ -598,6 +743,23 @@ body {
 /* ========================================
    Responsive
    ======================================== */
+/* Smooth scrolling for the whole page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Scroll progress bar at top of page */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #c084fc);
+    z-index: 99998;
+    transform-origin: left;
+    will-change: transform;
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
