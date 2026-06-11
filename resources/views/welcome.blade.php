@@ -35,8 +35,6 @@
     <div class="hero">
         <!-- Logo with pulse -->
         <div class="logo-wrapper" data-animate="logo">
-            <div class="logo-pulse" data-logo-pulse></div>
-            <div class="logo-pulse" data-logo-pulse></div>
             <div class="logo-circle" data-logo-circle>H</div>
         </div>
 

@@ -186,18 +186,7 @@ body {
 .logo-wrapper {
     position: relative;
     margin-bottom: 2rem;
-}
-
-/* Pulse ring behind logo - initial invisible, Anime.js handles */
-.logo-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 2px solid rgba(102, 126, 234, 0.3);
+    perspective: 300px;
 }
 
 .logo-circle {

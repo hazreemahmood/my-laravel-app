@@ -135,25 +135,7 @@
             }, 0);
         }
 
-        // Step 1b: Pulse rings start (0.3s) - handled outside timeline to avoid timeline blocking
-        if (pulseRings.length) {
-            pulseRings.forEach(function(ring, i) {
-                anime({
-                    targets: ring,
-                    scale: [
-                        { value: 0.8, duration: 1 },
-                        { value: 1.6, duration: 1200, easing: 'easeOutCirc' },
-                    ],
-                    opacity: [
-                        { value: 0.6, duration: 1 },
-                        { value: 0, duration: 1200 },
-                    ],
-                    duration: 1400,
-                    loop: true,
-                    delay: i * 1000,
-                });
-            });
-        }
+        // Pulse rings removed - replaced by Anime.js ripple effect in initLogoAnimation
 
         // Step 2: Title letters stagger in (0.6s)
         if (titleEl) {
@@ -626,27 +608,81 @@
     }
 
     // ========================================
-    // 8. LOGO HOVER EFFECT (gentle pulse)
+    // 8. HERO LOGO ANIMATION (Option J)
+    //    Ripple pulse + soft glow breathing
     // ========================================
-    function initLogoHover() {
+    function initLogoAnimation() {
         var logo = document.querySelector('[data-logo-circle]');
+        var pulseRings = document.querySelectorAll('[data-logo-pulse]');
         if (!logo) return;
 
+        // ---- A. Soft glow breathing ----
+        anime({
+            targets: logo,
+            boxShadow: [
+                { value: '0 0 40px rgba(102,126,234,0.3)', duration: 2000 },
+                { value: '0 0 60px rgba(102,126,234,0.5)', duration: 2000 },
+                { value: '0 0 40px rgba(102,126,234,0.3)', duration: 2000 },
+            ],
+            loop: true,
+            easing: 'easeInOutSine',
+        });
+
+        // ---- B. Ripple pulse (independent from existing pulse rings) ----
+        function createRipple() {
+            var ripple = document.createElement('div');
+            ripple.style.cssText = [
+                'position:absolute',
+                'top:50%',
+                'left:50%',
+                'width:0',
+                'height:0',
+                'border-radius:50%',
+                'border: 1.5px solid rgba(102,126,234,0.4)',
+                'transform:translate(-50%,-50%)',
+                'pointer-events:none',
+                'z-index:0',
+            ].join(';');
+            logo.parentElement.appendChild(ripple);
+
+            anime({
+                targets: ripple,
+                width: [0, 140],
+                height: [0, 140],
+                opacity: [0.6, 0],
+                borderWidth: ['2px', '0.5px'],
+                duration: 1800,
+                easing: 'easeOutCirc',
+                complete: function() {
+                    ripple.remove();
+                },
+            });
+        }
+
+        // Fire ripples at intervals
+        setInterval(function() {
+            createRipple();
+        }, 1000);
+
+        // Create an initial ripple on start
+        setTimeout(function() {
+            createRipple();
+        }, 300);
+
+        // ---- C. Simple hover scale (no tilt) ----
         logo.addEventListener('mouseenter', function() {
             anime({
                 targets: logo,
-                scale: [1, 1.08],
-                boxShadow: ['0 0 40px rgba(102,126,234,0.3)', '0 0 70px rgba(102,126,234,0.6)'],
-                duration: 400,
+                scale: [1, 1.05],
+                duration: 300,
                 easing: 'easeOutQuad',
             });
         });
         logo.addEventListener('mouseleave', function() {
             anime({
                 targets: logo,
-                scale: [1.08, 1],
-                boxShadow: ['0 0 70px rgba(102,126,234,0.6)', '0 0 40px rgba(102,126,234,0.3)'],
-                duration: 600,
+                scale: [1.05, 1],
+                duration: 400,
                 easing: 'easeOutElastic',
             });
         });
@@ -796,7 +832,7 @@
                     initScrollReveals();
                     initMagneticButtons();
                     initSkillRipple();
-                    initLogoHover();
+                    initLogoAnimation();
                     initMouseGlow();
 
                     // Start orb animations after loader
