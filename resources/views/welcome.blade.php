@@ -147,19 +147,21 @@
                 <div class="job-card-bar"></div>
                 <div class="job-card-inner">
                     <div class="job-card-header">
-                        <div class="job-card-company">💅 The Makeover Guys</div>
+                        <div class="job-card-company">
+                        <img src="http://www.garage.localhost/assets/Garage/images/mog-head-black.svg" alt="MOG" class="job-card-icon" />
+                        The Makeover Guys
+                    </div>
                         <div class="job-card-period">May 2025 — Present</div>
                     </div>
                     <div class="job-card-role">Full Stack Developer</div>
                     <div class="job-card-desc">
                         Architecting scalable full-stack modules, building real-time messaging features, 
-                        designing modern React frontends, integrating NetSuite & Atome APIs, 
+                        designing modern React frontends, 
                         and shipping features from idea to production. Also secretly the team's AI-powered 
                         coding sidekick 🤖.
                     </div>
                     <div class="job-card-tags">
                         <span class="job-tag">⚛️ React + REST APIs</span>
-                        <span class="job-tag">📦 NetSuite Integration</span>
                         <span class="job-tag">🤖 AI-Assisted Coding</span>
                         <span class="job-tag">🔧 System Performance</span>
                     </div>
@@ -180,7 +182,6 @@
                             <div class="detail-item">
                                 <span class="detail-label">🛠️ Tech Highlights</span>
                                 <ul class="detail-list">
-                                    <li>Integrated NetSuite and Atome third-party services</li>
                                     <li>Optimized backend services and MySQL queries</li>
                                     <li>Enhanced system reliability through refactoring and performance tuning</li>
                                     <li>Leveraged AI tools to accelerate development and automate tasks</li>
@@ -210,15 +211,15 @@
                     <div class="job-card-role">Senior Web Developer</div>
                     <div class="job-card-desc">
                         Built and maintained RESTful APIs with Laravel & CodeIgniter, integrated 
-                        third-party payment gateways, developed internal dashboards with ReactJS, 
+                        NetSuite & Atome APIs, developed internal dashboards with ReactJS, 
                         and kept production systems running like a well-oiled machine. Nearly 6 years 
                         of keeping the fashion e-commerce engine humming 🛒.
                     </div>
                     <div class="job-card-tags">
                         <span class="job-tag">💳 Payment Gateway APIs</span>
+                        <span class="job-tag">📦 NetSuite & Atome Integration</span>
                         <span class="job-tag">📊 Internal Dashboards</span>
                         <span class="job-tag">🛠️ Production Monitoring</span>
-                        <span class="job-tag">🧹 Code Refactoring</span>
                     </div>
                     <div class="job-card-expand"><span class="arrow">▼</span> Click to see details</div>
                 </div>
@@ -229,7 +230,7 @@
                                 <span class="detail-label">🎯 Key Achievements</span>
                                 <ul class="detail-list">
                                     <li>Built and maintained RESTful APIs using CodeIgniter and Laravel</li>
-                                    <li>Integrated third-party payment gateways for seamless transactions</li>
+                                    <li>Integrated NetSuite, Atome and third-party payment gateways</li>
                                     <li>Developed an internal dashboard using JavaScript, jQuery, and ReactJS</li>
                                 </ul>
                             </div>

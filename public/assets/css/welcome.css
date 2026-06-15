@@ -570,6 +570,17 @@ body {
     font-size: 1.4rem;
     font-weight: 700;
     color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.job-card-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    filter: brightness(0) invert(1);
 }
 
 .job-card-period {
