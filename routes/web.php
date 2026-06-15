@@ -24,12 +24,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Public routes
+// Public routes - redirect to login (welcome page moved to standalone portfolio)
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 Route::get('/welcome', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 // Guest routes
