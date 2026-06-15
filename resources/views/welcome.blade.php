@@ -148,7 +148,7 @@
                 <div class="job-card-inner">
                     <div class="job-card-header">
                         <div class="job-card-company">
-                        <img src="http://www.garage.localhost/assets/Garage/images/mog-head-black.svg" alt="MOG" class="job-card-icon" />
+                        <img src="{{ asset('img/logo.png') }}" alt="MOG" class="job-card-icon" />
                         The Makeover Guys
                     </div>
                         <div class="job-card-period">May 2025 — Present</div>
