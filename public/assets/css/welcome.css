@@ -17,6 +17,73 @@ body {
     color: #ffffff;
 }
 
+/* ========================================
+   Loader / Splash Screen
+   ======================================== */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0f0f1a;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.loader-logo {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #fff;
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+    will-change: transform, opacity;
+}
+
+.loader-text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    will-change: transform, opacity;
+}
+
+.loader-bar {
+    width: 160px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    will-change: opacity;
+}
+
+.loader-bar-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #c084fc);
+    border-radius: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    will-change: transform;
+}
+
 /* Animated background grid */
 .bg-grid {
     position: fixed;
@@ -31,13 +98,13 @@ body {
     z-index: 0;
 }
 
-/* Floating gradient orbs */
+/* Floating gradient orbs - positioning only, animation by Anime.js */
 .orb {
     position: fixed;
     border-radius: 50%;
     filter: blur(80px);
     z-index: 0;
-    animation: orbFloat 8s ease-in-out infinite;
+    will-change: transform, opacity;
 }
 .orb-1 {
     width: 400px;
@@ -52,7 +119,6 @@ body {
     background: rgba(118, 75, 162, 0.12);
     bottom: -80px;
     right: -80px;
-    animation-delay: 3s;
 }
 .orb-3 {
     width: 250px;
@@ -60,16 +126,9 @@ body {
     background: rgba(255, 107, 107, 0.08);
     top: 50%;
     left: 60%;
-    animation-delay: 5s;
 }
 
-@keyframes orbFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -30px) scale(1.05); }
-    66% { transform: translate(-20px, 20px) scale(0.95); }
-}
-
-/* Main hero container */
+/* Main hero container - all animated children start hidden via CSS */
 .hero {
     position: relative;
     z-index: 1;
@@ -82,28 +141,52 @@ body {
     text-align: center;
 }
 
-/* Pulse circle behind logo */
+/* Hero animated elements - hidden until JS animates them */
+[data-animate="logo"] [data-logo-circle] {
+    opacity: 0;
+    transform: scale(0.2) rotate(-180deg);
+}
+
+/* Title hidden until JS replaces text with animatable letter spans */
+[data-animate="title"] {
+    opacity: 0;
+}
+
+[data-animate="typing"] {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+[data-animate="divider"] {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+[data-animate="tagline"] {
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+[data-animate="buttons"] [data-btn] {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+[data-animate="highlights"] [data-highlight] {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+}
+
+[data-animate="skills"] [data-skill] {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Logo wrapper and circle */
 .logo-wrapper {
     position: relative;
     margin-bottom: 2rem;
-}
-.logo-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 2px solid rgba(102, 126, 234, 0.3);
-    animation: pulseRing 2s ease-out infinite;
-}
-.logo-pulse:nth-child(2) {
-    animation-delay: 1s;
-}
-@keyframes pulseRing {
-    0% { width: 100px; height: 100px; opacity: 1; }
-    100% { width: 160px; height: 160px; opacity: 0; }
+    perspective: 300px;
 }
 
 .logo-circle {
@@ -120,11 +203,6 @@ body {
     font-weight: 800;
     color: #fff;
     box-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
-    animation: logoGlow 3s ease-in-out infinite;
-}
-@keyframes logoGlow {
-    0%, 100% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.3); }
-    50% { box-shadow: 0 0 60px rgba(102, 126, 234, 0.5); }
 }
 
 /* Main title */
@@ -157,11 +235,7 @@ body {
     height: 1.3rem;
     background: #a8b4ff;
     margin-left: 4px;
-    animation: blink 1s step-end infinite;
     vertical-align: text-bottom;
-}
-@keyframes blink {
-    50% { opacity: 0; }
 }
 
 /* Subtitle */
@@ -188,10 +262,11 @@ body {
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
     letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .btn-primary {
@@ -232,7 +307,6 @@ body {
     border-radius: 16px;
     padding: 1.5rem 1rem;
     backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
     cursor: default;
 }
 .highlight-card:hover {
@@ -283,7 +357,7 @@ body {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: rgba(255, 255, 255, 0.5);
-    transition: all 0.3s ease;
+    cursor: default;
 }
 .skill-tag:hover {
     background: rgba(102, 126, 234, 0.15);
@@ -307,7 +381,7 @@ body {
 
 .journey-section {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 0 1.5rem;
     margin: 4rem auto 2rem;
 }
@@ -348,6 +422,85 @@ body {
 .journey-header p {
     color: rgba(255, 255, 255, 0.6);
     font-size: 1.05rem;
+}
+
+/* Timeline container */
+.timeline {
+    position: relative;
+    padding: 1rem 0;
+}
+
+/* Vertical timeline line on the left */
+.timeline-line {
+    position: absolute;
+    left: 2.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(102, 126, 234, 0.1), rgba(192, 132, 252, 0.4), rgba(102, 126, 234, 0.1));
+    will-change: transform;
+    opacity: 0.5;
+}
+
+/* Timeline dot on each job card */
+.job-card {
+    position: relative;
+    width: calc(100% - 5rem);
+    margin: 2rem 0 2rem 4rem;
+    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* Timeline dot connector on the left for all cards */
+.job-card::before {
+    content: '';
+    position: absolute;
+    top: 2rem;
+    left: -2.6rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(102, 126, 234, 0.5);
+    background: #0f0f1a;
+    z-index: 2;
+    transition: all 0.4s ease;
+}
+
+.job-card:hover::before {
+    background: #667eea;
+    border-color: #667eea;
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Colorful left border per job */
+.job-card[data-color="purple"] { border-left: 3px solid #667eea; }
+.job-card[data-color="pink"] { border-left: 3px solid #f093fb; }
+.job-card[data-color="green"] { border-left: 3px solid #4facfe; }
+.job-card[data-color="orange"] { border-left: 3px solid #fa709a; }
+.job-card[data-color="blue"] { border-left: 3px solid #a18cd1; }
+
+/* Remove old top bar */
+.job-card-bar { display: none; }
+
+/* Timeline responsive */
+@media (max-width: 768px) {
+    .timeline-line { left: 20px; }
+    .job-card {
+        width: calc(100% - 3rem);
+        margin-left: 3rem !important;
+        margin-right: 0 !important;
+    }
+    .job-card::before {
+        left: -26px !important;
+        right: auto !important;
+        width: 10px;
+        height: 10px;
+    }
 }
 
 /* Job stats row */
@@ -396,44 +549,8 @@ body {
 }
 
 /* ========================================
-   Fun Job Cards (No timeline line)
-   More readable card-based layout
+   Timeline Card Inner Layout (shared)
    ======================================== */
-
-.job-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1.8rem;
-}
-
-.job-card {
-    background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.job-card:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
-    transform: translateY(-2px);
-}
-
-/* Colorful top bar per job */
-.job-card-bar {
-    height: 5px;
-    width: 100%;
-    border-radius: 20px 20px 0 0;
-}
-
-.job-card[data-color="purple"] .job-card-bar { background: linear-gradient(90deg, #667eea, #764ba2); }
-.job-card[data-color="pink"] .job-card-bar { background: linear-gradient(90deg, #f093fb, #f5576c); }
-.job-card[data-color="green"] .job-card-bar { background: linear-gradient(90deg, #4facfe, #00f2fe); }
-.job-card[data-color="orange"] .job-card-bar { background: linear-gradient(90deg, #fa709a, #fee140); }
-.job-card[data-color="blue"] .job-card-bar { background: linear-gradient(90deg, #a18cd1, #fbc2eb); }
 
 /* Card inner */
 .job-card-inner {
@@ -453,6 +570,17 @@ body {
     font-size: 1.4rem;
     font-weight: 700;
     color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.job-card-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    filter: brightness(0) invert(1);
 }
 
 .job-card-period {
@@ -495,7 +623,6 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.08);
     color: rgba(255, 255, 255, 0.6);
-    transition: all 0.3s ease;
     cursor: default;
 }
 
@@ -518,7 +645,6 @@ body {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 600;
-    transition: all 0.3s ease;
     pointer-events: none;
 }
 
@@ -535,17 +661,11 @@ body {
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* Expandable details */
+/* Expandable details - height managed by Anime.js */
 .job-card-details {
-    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.4s ease;
+    height: 0;
     opacity: 0;
-}
-
-.job-card.active .job-card-details {
-    max-height: 600px;
-    opacity: 1;
 }
 
 .job-card-details-inner {
@@ -600,31 +720,46 @@ body {
     top: 3px;
 }
 
-/* Bounce animation on cards */
-@keyframes cardPop {
-    0% { opacity: 0; transform: translateY(30px) scale(0.97); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.job-card {
-    animation: cardPop 0.5s ease-out backwards;
-}
-
-.job-card:nth-child(1) { animation-delay: 0.05s; }
-.job-card:nth-child(2) { animation-delay: 0.15s; }
-.job-card:nth-child(3) { animation-delay: 0.25s; }
-.job-card:nth-child(4) { animation-delay: 0.35s; }
-.job-card:nth-child(5) { animation-delay: 0.45s; }
-
-/* Colorful glow on active card */
+/* Active card glow */
 .job-card.active {
     border-color: rgba(102, 126, 234, 0.3);
     box-shadow: 0 0 30px rgba(102, 126, 234, 0.08);
 }
 
 /* ========================================
+   Scroll-trigger initial states (hidden)
+   ======================================== */
+[data-scroll] {
+    opacity: 0;
+    transform: translateY(30px);
+    will-change: transform, opacity;
+}
+
+[data-animate="journey"] [data-scroll] {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* ========================================
    Responsive
    ======================================== */
+/* Smooth scrolling for the whole page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Scroll progress bar at top of page */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #c084fc);
+    z-index: 99998;
+    transform-origin: left;
+    will-change: transform;
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;

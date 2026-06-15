@@ -1,19 +1,256 @@
 /**
- * Welcome Page - Interactive Features
- * Reusable across guest/landing pages
+ * Welcome Page - Anime.js Powered Animations
+ * Professional entrance sequence, scroll-triggered reveals, and interactive effects
  */
-
 (function() {
     'use strict';
 
     // ========================================
-    // Typing Effect
+    // 1. ORB CONTINUOUS MORPHING
+    //    Orbs follow complex paths using Anime.js
     // ========================================
-    const typingElement = document.getElementById('typing-text');
-    const taglineElement = document.getElementById('dynamic-tagline');
+    function animateOrbs() {
+        const orbs = document.querySelectorAll('[data-orb]');
+        if (!orbs.length) return;
 
-    if (typingElement) {
-        const roles = [
+        const orbConfigs = [
+            {
+                // Orb 1: large figure-8 path
+                translateX: [-100, 30, -60, 40, -100],
+                translateY: [-100, -40, 20, -60, -100],
+                scale: [1, 1.08, 0.95, 1.05, 1],
+                duration: 14000,
+            },
+            {
+                // Orb 2: gentle diagonal drift
+                translateX: [0, -40, 20, -30, 0],
+                translateY: [0, -30, -50, -20, 0],
+                scale: [1, 0.95, 1.07, 1.02, 1],
+                duration: 18000,
+            },
+            {
+                // Orb 3: smaller wandering
+                translateX: [0, 50, -30, 60, 0],
+                translateY: [0, -30, 20, -20, 0],
+                scale: [1, 1.05, 0.92, 1.03, 1],
+                duration: 12000,
+            },
+        ];
+
+        orbs.forEach(function(orb, i) {
+            if (!orbConfigs[i]) return;
+            function loop() {
+                anime({
+                    targets: orb,
+                    translateX: orbConfigs[i].translateX,
+                    translateY: orbConfigs[i].translateY,
+                    scale: orbConfigs[i].scale,
+                    duration: orbConfigs[i].duration,
+                    easing: 'easeInOutSine',
+                    loop: true,
+                    direction: 'alternate',
+                });
+            }
+            loop();
+        });
+    }
+
+    // ========================================
+    // 2. HERO LOAD SEQUENCE (2-3s)
+    //    Choreographed entrance using timeline
+    // ========================================
+    function heroEntrance() {
+        const logoCircle = document.querySelector('[data-logo-circle]');
+        const titleEl = document.querySelector('[data-animate="title"]');
+        const typingEl = document.querySelector('[data-animate="typing"]');
+        const dividerEl = document.querySelector('[data-animate="divider"]');
+        const taglineEl = document.querySelector('[data-animate="tagline"]');
+        const buttonsEl = document.querySelector('[data-animate="buttons"]');
+        const highlights = document.querySelectorAll('[data-highlight]');
+        const skills = document.querySelectorAll('[data-skill]');
+        const pulseRings = document.querySelectorAll('[data-logo-pulse]');
+
+        // Set initial states
+        // IMPORTANT: Only set opacity on elements we animate directly,
+        // NOT on parent containers of animated children (opacity:0 parent = invisible children)
+        if (logoCircle) {
+            logoCircle.style.opacity = '0';
+            logoCircle.style.transform = 'scale(0.2) rotate(-180deg)';
+        }
+        if (titleEl) {
+            // DO NOT set opacity on h1 parent - we animate children spans inside it
+            const titleText = titleEl.textContent;
+            titleEl.innerHTML = '';
+            for (var i = 0; i < titleText.length; i++) {
+                var span = document.createElement('span');
+                span.textContent = titleText[i] === ' ' ? '\u00A0' : titleText[i];
+                span.style.display = 'inline-block';
+                span.style.opacity = '0';
+                span.style.transform = 'translateY(-60px)';
+                titleEl.appendChild(span);
+            }
+        }
+        if (typingEl) {
+            typingEl.style.opacity = '0';
+            typingEl.style.transform = 'translateY(10px)';
+        }
+        if (dividerEl) {
+            dividerEl.style.opacity = '0';
+            dividerEl.style.transform = 'scaleX(0)';
+        }
+        if (taglineEl) {
+            taglineEl.style.opacity = '0';
+            taglineEl.style.transform = 'translateY(15px)';
+        }
+        if (buttonsEl) {
+            // Set initial state on individual buttons (not the parent group)
+            var btns = buttonsEl.querySelectorAll('[data-btn]');
+            btns.forEach(function(b) {
+                b.style.opacity = '0';
+                b.style.transform = 'translateY(30px)';
+            });
+        }
+        highlights.forEach(function(h) {
+            h.style.opacity = '0';
+            h.style.transform = 'translateY(40px) scale(0.93)';
+        });
+        skills.forEach(function(s) {
+            s.style.opacity = '0';
+            s.style.transform = 'translateY(20px)';
+        });
+
+        // ---- Build timeline ----
+        var tl = anime.timeline({
+            easing: 'easeOutExpo',
+        });
+
+        // Step 1: Logo elastic bounce (0s - 0.8s)
+        if (logoCircle) {
+            tl.add({
+                targets: logoCircle,
+                opacity: [0, 1],
+                scale: { value: 1, duration: 800, easing: 'easeOutElastic(1, 0.6)' },
+                rotate: { value: 0, duration: 600, easing: 'easeOutCirc' },
+                duration: 800,
+            }, 0);
+        }
+
+        // Pulse rings removed - replaced by Anime.js ripple effect in initLogoAnimation
+
+        // Step 2: Title letters stagger in (0.6s)
+        if (titleEl) {
+            var titleLetters = titleEl.querySelectorAll('span');
+            tl.add({
+                targets: titleLetters,
+                opacity: [0, 1],
+                translateY: [-60, 0],
+                duration: 700,
+                delay: anime.stagger(50),
+            }, 600);
+        }
+
+        // Step 3: Typing wrapper fades in (1.2s)
+        if (typingEl) {
+            tl.add({
+                targets: typingEl,
+                opacity: [0, 1],
+                translateY: [10, 0],
+                duration: 500,
+            }, 1200);
+        }
+
+        // Step 4: Divider scales in (1.7s)
+        if (dividerEl) {
+            tl.add({
+                targets: dividerEl,
+                opacity: [0, 1],
+                scaleX: [0, 1],
+                duration: 500,
+                easing: 'easeOutBack',
+            }, 1700);
+        }
+
+        // Step 5: Tagline fades in (1.9s)
+        if (taglineEl) {
+            tl.add({
+                targets: taglineEl,
+                opacity: [0, 1],
+                translateY: [15, 0],
+                duration: 500,
+            }, 1900);
+        }
+
+        // Step 6: Buttons slide up (2.2s)
+        if (buttonsEl) {
+            var btns = buttonsEl.querySelectorAll('[data-btn]');
+            if (btns.length) {
+                tl.add({
+                    targets: btns,
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    duration: 600,
+                    delay: anime.stagger(120),
+                    easing: 'easeOutBack',
+                }, 2200);
+            } else {
+                tl.add({
+                    targets: buttonsEl,
+                    opacity: [0, 1],
+                    translateY: [30, 0],
+                    duration: 600,
+                }, 2200);
+            }
+        }
+
+        // Step 7: Highlight cards stagger (2.6s)
+        if (highlights.length) {
+            tl.add({
+                targets: highlights,
+                opacity: [0, 1],
+                translateY: [40, 0],
+                scale: [0.93, 1],
+                duration: 600,
+                delay: anime.stagger(100),
+                easing: 'easeOutExpo',
+            }, 2600);
+        }
+
+        // Step 8: Skill tags wave in (3.0s)
+        if (skills.length) {
+            tl.add({
+                targets: skills,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 400,
+                delay: anime.stagger(40, { from: 'center' }),
+                easing: 'easeOutQuad',
+            }, 3000);
+        }
+    }
+
+    // ========================================
+    // 3. TYPING EFFECT (starts after entrance)
+    // ========================================
+    function initTyping() {
+        var typingElement = document.getElementById('typing-text');
+        var taglineElement = document.getElementById('dynamic-tagline');
+        var cursor = document.querySelector('.cursor');
+
+        if (!typingElement) return;
+
+        // Blink cursor with Anime
+        if (cursor) {
+            anime({
+                targets: cursor,
+                opacity: [1, 0],
+                duration: 800,
+                loop: true,
+                direction: 'alternate',
+                easing: 'steps(1)',
+            });
+        }
+
+        var roles = [
             'building scalable systems with Laravel & React',
             'crafting intuitive user experiences',
             'optimizing backend performance',
@@ -21,21 +258,24 @@
             'leading end-to-end feature delivery',
         ];
 
-        const taglines = [
+        var taglines = [
             '10+ years of experience building scalable web applications',
             'From architecture to deployment — full-stack expertise',
             'Passionate about clean code & great user experiences',
             'Laravel · React · MySQL — the full stack toolkit',
         ];
 
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let taglineIndex = 0;
+        var roleIndex = 0;
+        var charIndex = 0;
+        var isDeleting = false;
+        var taglineIndex = 0;
+
+        // Start typing after hero entrance (~3.4s)
+        var startDelay = 3400;
 
         function typeEffect() {
-            const currentRole = roles[roleIndex];
-            
+            var currentRole = roles[roleIndex];
+
             if (!isDeleting) {
                 typingElement.textContent = currentRole.substring(0, charIndex + 1);
                 charIndex++;
@@ -52,8 +292,21 @@
                     isDeleting = false;
                     roleIndex = (roleIndex + 1) % roles.length;
                     if (taglineElement) {
-                        taglineIndex = (taglineIndex + 1) % taglines.length;
-                        taglineElement.textContent = taglines[taglineIndex];
+                        // Animate tagline swap
+                        anime({
+                            targets: taglineElement,
+                            opacity: [1, 0],
+                            duration: 200,
+                            complete: function() {
+                                taglineIndex = (taglineIndex + 1) % taglines.length;
+                                taglineElement.textContent = taglines[taglineIndex];
+                                anime({
+                                    targets: taglineElement,
+                                    opacity: [0, 1],
+                                    duration: 400,
+                                });
+                            }
+                        });
                     }
                     setTimeout(typeEffect, 500);
                     return;
@@ -62,50 +315,539 @@
             }
         }
 
-        setTimeout(typeEffect, 1000);
+        setTimeout(typeEffect, startDelay);
     }
 
     // ========================================
-    // Mouse Parallax Effect for Orbs
+    // 4. SMOOTH SCROLL PROGRESS BAR
+    //    Anime.js-driven scroll indicator
     // ========================================
-    const orbs = document.querySelectorAll('.orb');
-    
-    if (orbs.length > 0) {
-        document.addEventListener('mousemove', function(e) {
-            const x = (e.clientX / window.innerWidth) * 20 - 10;
-            const y = (e.clientY / window.innerHeight) * 20 - 10;
-            orbs.forEach(function(orb, i) {
-                orb.style.transform = 'translate(' + (x * (i + 1) * 0.2) + 'px, ' + (y * (i + 1) * 0.2) + 'px)';
-            });
-        });
-    }
+    function initScrollProgress() {
+        var progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress';
+        document.body.appendChild(progressBar);
 
-    // ========================================
-    // Job Card Expand/Collapse (Accordion)
-    // ========================================
-    const jobCards = document.querySelectorAll('.job-card');
-
-    jobCards.forEach(function(card) {
-        card.addEventListener('click', function(e) {
-            // Don't toggle if clicking a tag badge
-            if (e.target.closest('.job-tag')) return;
-
-            const isActive = card.classList.contains('active');
-            
-            // Close all other cards (accordion)
-            jobCards.forEach(function(otherCard) {
-                if (otherCard !== card) {
-                    otherCard.classList.remove('active');
-                }
-            });
-
-            // Toggle clicked card
-            if (isActive) {
-                card.classList.remove('active');
-            } else {
-                card.classList.add('active');
+        var scrollTicking = false;
+        window.addEventListener('scroll', function() {
+            if (!scrollTicking) {
+                window.requestAnimationFrame(function() {
+                    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    var progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+                    anime.set(progressBar, { scaleX: progress });
+                    scrollTicking = false;
+                });
+                scrollTicking = true;
             }
         });
+    }
+
+    // ========================================
+    // 5. SCROLL-DRIVEN ELEMENT REVEALS
+    //    Smooth progress-based animation
+    // ========================================
+    function initScrollReveals() {
+        var revealElements = [];
+
+        // Collect all elements with [data-scroll]
+        var scrollEls = document.querySelectorAll('[data-scroll]');
+        scrollEls.forEach(function(el) {
+            revealElements.push({
+                el: el,
+                type: el.getAttribute('data-scroll'),
+                revealed: false,
+            });
+        });
+
+        // Also collect individual job cards for stagger
+        var jobCards = document.querySelectorAll('[data-job-card]');
+        var statsNumbers = document.querySelectorAll('[data-stat]');
+
+        function getProgress(el) {
+            var rect = el.getBoundingClientRect();
+            var windowHeight = window.innerHeight;
+            // 0 = element just entering bottom of viewport
+            // 1 = element top reaches upper 25% of viewport (triggers sooner)
+            var triggerPoint = windowHeight * 0.75;
+            var progress = 1 - ((rect.top - triggerPoint) / (windowHeight * 0.5));
+            return Math.min(1, Math.max(0, progress));
+        }
+
+        var ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    // Reveal section elements based on scroll progress
+                    revealElements.forEach(function(item) {
+                        if (item.revealed) return;
+
+                        var progress = getProgress(item.el);
+                        if (progress > 0) {
+                            var opacity = Math.min(1, progress * 2);
+                            var translateY = 30 - (progress * 30);
+                            anime.set(item.el, {
+                                opacity: opacity,
+                                translateY: translateY,
+                            });
+
+                            // Mark as revealed once fully visible
+                            if (progress >= 1) {
+                                item.revealed = true;
+                                anime.set(item.el, { opacity: 1, translateY: 0 });
+
+                                // Trigger child animations on reveal
+                                if (item.type === 'stats') {
+                                    triggerStatsCount(item.el);
+                                }
+                                if (item.type === 'job-cards') {
+                                    triggerJobCards(item.el);
+                                }
+                            }
+                        }
+                    });
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // One-time trigger for elements already in view on load
+        setTimeout(function() {
+            window.dispatchEvent(new Event('scroll'));
+        }, 100);
+    }
+
+    function triggerStatsCount(container) {
+        var stats = container.querySelectorAll('[data-stat]');
+        stats.forEach(function(stat, i) {
+            var numberEl = stat.querySelector('[data-stat-target]');
+            if (!numberEl) return;
+            var targetVal = numberEl.getAttribute('data-stat-target');
+            numberEl.textContent = '0';
+
+            if (!isNaN(parseFloat(targetVal)) && targetVal.indexOf('+') === -1) {
+                anime({
+                    targets: numberEl,
+                    innerHTML: [0, parseInt(targetVal)],
+                    duration: 1500,
+                    delay: i * 200,
+                    easing: 'easeOutQuad',
+                    round: 1,
+                    update: function(anim) {
+                        numberEl.textContent = Math.round(anim.animatables[0].target.innerHTML);
+                    }
+                });
+            } else {
+                numberEl.textContent = targetVal;
+                anime({
+                    targets: numberEl,
+                    opacity: [0, 1],
+                    scale: [1.5, 1],
+                    duration: 600,
+                    delay: i * 200,
+                    easing: 'easeOutBack',
+                });
+            }
+        });
+    }
+
+    function triggerJobCards(container) {
+        var cards = container.querySelectorAll('[data-job-card]');
+        var timelineLine = container.querySelector('[data-timeline-line]');
+
+        // Animate timeline line growing (scale from top)
+        if (timelineLine) {
+            timelineLine.style.transformOrigin = 'top center';
+            anime({
+                targets: timelineLine,
+                scaleY: [0, 1],
+                duration: 1200,
+                easing: 'easeOutExpo',
+            });
+        }
+
+        // Animate cards staggering in from their respective sides
+        anime({
+            targets: cards,
+            opacity: [0, 1],
+            translateY: [30, 0],
+            duration: 700,
+            delay: anime.stagger(180, { from: 'first' }),
+            easing: 'easeOutExpo',
+        });
+
+        // Setup expand/collapse after cards are visible
+        setTimeout(function() {
+            setupCardExpandCollapse();
+        }, cards.length * 180 + 700);
+    }
+
+    // ========================================
+    // 5. JOB CARD EXPAND/COLLAPSE (Anime.js)
+    // ========================================
+    function setupCardExpandCollapse() {
+        var jobCards = document.querySelectorAll('[data-job-card]');
+
+        jobCards.forEach(function(card) {
+            card.addEventListener('click', function(e) {
+                // Don't toggle if clicking a tag badge
+                if (e.target.closest('.job-tag')) return;
+
+                var details = card.querySelector('[data-card-details]');
+                if (!details) return;
+
+                var isActive = card.classList.contains('active');
+
+                // Close all other cards
+                jobCards.forEach(function(otherCard) {
+                    if (otherCard !== card && otherCard.classList.contains('active')) {
+                        var otherDetails = otherCard.querySelector('[data-card-details]');
+                        var otherInner = otherDetails ? otherDetails.querySelector('.job-card-details-inner') : null;
+                        var otherHeight = otherInner ? otherInner.scrollHeight : 0;
+                        otherCard.classList.remove('active');
+                        if (otherDetails) {
+                            anime({
+                                targets: otherDetails,
+                                height: [otherHeight, 0],
+                                opacity: [1, 0],
+                                duration: 350,
+                                easing: 'easeInOutQuad',
+                            });
+                        }
+                    }
+                });
+
+                if (isActive) {
+                    // Close this card
+                    var height = details.querySelector('.job-card-details-inner').scrollHeight;
+                    card.classList.remove('active');
+                    anime({
+                        targets: details,
+                        height: [height, 0],
+                        opacity: [1, 0],
+                        duration: 350,
+                        easing: 'easeInOutQuad',
+                    });
+                } else {
+                    // Open this card
+                    card.classList.add('active');
+                    details.style.height = '0';
+                    details.style.opacity = '0';
+                    var innerHeight = details.querySelector('.job-card-details-inner').scrollHeight;
+                    anime({
+                        targets: details,
+                        height: [0, innerHeight],
+                        opacity: [0, 1],
+                        duration: 400,
+                        easing: 'easeOutQuad',
+                    });
+                }
+            });
+        });
+    }
+
+    // ========================================
+    // 6. BUTTON MAGNETIC EFFECT
+    //    Buttons subtly follow cursor
+    // ========================================
+    function initMagneticButtons() {
+        var btns = document.querySelectorAll('[data-btn]');
+        btns.forEach(function(btn) {
+            btn.addEventListener('mousemove', function(e) {
+                var rect = btn.getBoundingClientRect();
+                var x = e.clientX - rect.left - rect.width / 2;
+                var y = e.clientY - rect.top - rect.height / 2;
+                var strength = 8;
+                anime({
+                    targets: btn,
+                    translateX: (x / rect.width) * strength,
+                    translateY: (y / rect.height) * strength,
+                    duration: 200,
+                    easing: 'easeOutQuad',
+                });
+            });
+            btn.addEventListener('mouseleave', function() {
+                anime({
+                    targets: btn,
+                    translateX: 0,
+                    translateY: 0,
+                    duration: 400,
+                    easing: 'easeOutElastic',
+                });
+            });
+        });
+    }
+
+    // ========================================
+    // 7. SKILL TAG RIPPLE ON HOVER
+    // ========================================
+    function initSkillRipple() {
+        var skills = document.querySelectorAll('[data-skill]');
+        skills.forEach(function(skill) {
+            skill.addEventListener('mouseenter', function(e) {
+                // Create ripple element
+                var ripple = document.createElement('span');
+                ripple.style.cssText = 'position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:rgba(102,126,234,0.25);transform:translate(-50%,-50%);pointer-events:none;z-index:-1;';
+                skill.style.position = 'relative';
+                skill.style.overflow = 'hidden';
+                skill.appendChild(ripple);
+                anime({
+                    targets: ripple,
+                    width: [0, skill.offsetWidth * 1.5],
+                    height: [0, skill.offsetWidth * 1.5],
+                    opacity: [0.6, 0],
+                    duration: 500,
+                    easing: 'easeOutQuad',
+                    complete: function() {
+                        if (ripple.parentNode) ripple.parentNode.removeChild(ripple);
+                    },
+                });
+            });
+        });
+    }
+
+    // ========================================
+    // 8. HERO LOGO ANIMATION (Option J)
+    //    Ripple pulse + soft glow breathing
+    // ========================================
+    function initLogoAnimation() {
+        var logo = document.querySelector('[data-logo-circle]');
+        var pulseRings = document.querySelectorAll('[data-logo-pulse]');
+        if (!logo) return;
+
+        // ---- A. Soft glow breathing ----
+        anime({
+            targets: logo,
+            boxShadow: [
+                { value: '0 0 40px rgba(102,126,234,0.3)', duration: 2000 },
+                { value: '0 0 60px rgba(102,126,234,0.5)', duration: 2000 },
+                { value: '0 0 40px rgba(102,126,234,0.3)', duration: 2000 },
+            ],
+            loop: true,
+            easing: 'easeInOutSine',
+        });
+
+        // ---- B. Ripple pulse (independent from existing pulse rings) ----
+        function createRipple() {
+            var ripple = document.createElement('div');
+            ripple.style.cssText = [
+                'position:absolute',
+                'top:50%',
+                'left:50%',
+                'width:0',
+                'height:0',
+                'border-radius:50%',
+                'border: 1.5px solid rgba(102,126,234,0.4)',
+                'transform:translate(-50%,-50%)',
+                'pointer-events:none',
+                'z-index:0',
+            ].join(';');
+            logo.parentElement.appendChild(ripple);
+
+            anime({
+                targets: ripple,
+                width: [0, 140],
+                height: [0, 140],
+                opacity: [0.6, 0],
+                borderWidth: ['2px', '0.5px'],
+                duration: 1800,
+                easing: 'easeOutCirc',
+                complete: function() {
+                    ripple.remove();
+                },
+            });
+        }
+
+        // Fire ripples at intervals
+        setInterval(function() {
+            createRipple();
+        }, 1000);
+
+        // Create an initial ripple on start
+        setTimeout(function() {
+            createRipple();
+        }, 300);
+
+        // ---- C. Simple hover scale (no tilt) ----
+        logo.addEventListener('mouseenter', function() {
+            anime({
+                targets: logo,
+                scale: [1, 1.05],
+                duration: 300,
+                easing: 'easeOutQuad',
+            });
+        });
+        logo.addEventListener('mouseleave', function() {
+            anime({
+                targets: logo,
+                scale: [1.05, 1],
+                duration: 400,
+                easing: 'easeOutElastic',
+            });
+        });
+    }
+
+    // ========================================
+    // 9. CURSOR GLOW TRAIL (Minimal)
+    // ========================================
+    function initMouseGlow() {
+        var glow = document.createElement('div');
+        glow.style.cssText = 'position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(102,126,234,0.04) 0%,transparent 70%);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);opacity:0;';
+        document.body.appendChild(glow);
+
+        var timeoutId = null;
+        document.addEventListener('mousemove', function(e) {
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
+            if (glow.style.opacity === '0') {
+                anime({
+                    targets: glow,
+                    opacity: [0, 1],
+                    duration: 500,
+                    easing: 'easeOutQuad',
+                });
+            }
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(function() {
+                anime({
+                    targets: glow,
+                    opacity: [1, 0],
+                    duration: 1000,
+                    easing: 'easeOutQuad',
+                });
+            }, 2000);
+        });
+    }
+
+    // ========================================
+    // 10. LOADER / SPLASH SCREEN
+    //     3-second spring-animated intro
+    // ========================================
+    function initLoader() {
+        var loader = document.getElementById('loader');
+        var logo = document.querySelector('[data-loader-logo]');
+        var text = document.querySelector('[data-loader-text]');
+        var barFill = document.querySelector('[data-loader-fill]');
+        var bar = document.querySelector('[data-loader-bar]');
+
+        if (!loader) return;
+
+        // Set initial states
+        if (logo) {
+            logo.style.opacity = '0';
+            logo.style.transform = 'scale(0) rotate(-180deg)';
+        }
+        if (text) {
+            text.style.opacity = '0';
+            text.style.transform = 'translateY(20px)';
+        }
+        if (bar) bar.style.opacity = '0';
+
+        // Step 1: Logo springs in with elastic easing (0s)
+        if (logo) {
+            anime({
+                targets: logo,
+                opacity: [0, 1],
+                scale: { value: 1, duration: 1200, easing: 'easeOutElastic(1, 0.6)' },
+                rotate: { value: 0, duration: 900, easing: 'easeOutCirc' },
+                duration: 1200,
+            });
+        }
+
+        // Step 2: Text slides up with spring (0.3s)
+        if (text) {
+            anime({
+                targets: text,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 800,
+                delay: 300,
+                easing: 'easeOutElastic(1, 0.8)',
+            });
+        }
+
+        // Step 3: Progress bar fade and fill (0.6s - 2.8s)
+        if (bar && barFill) {
+            // Fade bar in
+            anime({
+                targets: bar,
+                opacity: [0, 1],
+                duration: 400,
+                delay: 600,
+                easing: 'easeOutQuad',
+            });
+
+            // Fill the bar with spring-like progress over ~2.2s
+            anime({
+                targets: barFill,
+                scaleX: [0, 1],
+                duration: 2200,
+                delay: 600,
+                easing: 'easeInOutQuad',
+            });
+        }
+
+        // Step 4: After 3s total, close loader with spring transition
+        setTimeout(function() {
+            if (logo) {
+                anime({
+                    targets: logo,
+                    scale: { value: 1.3, duration: 400, easing: 'easeOutSine' },
+                    opacity: [1, 0],
+                    duration: 400,
+                });
+            }
+            if (text) {
+                anime({
+                    targets: text,
+                    opacity: [1, 0],
+                    translateY: [0, -20],
+                    duration: 300,
+                    easing: 'easeOutQuad',
+                });
+            }
+            if (bar) {
+                anime({
+                    targets: bar,
+                    opacity: [1, 0],
+                    duration: 300,
+                });
+            }
+
+            // Fade out loader background
+            anime({
+                targets: loader,
+                opacity: [1, 0],
+                duration: 500,
+                delay: 200,
+                easing: 'easeOutQuad',
+                complete: function() {
+                    loader.style.display = 'none';
+
+                    // Now start the hero entrance
+                    heroEntrance();
+                    initTyping();
+                    initScrollProgress();
+                    initScrollReveals();
+                    initMagneticButtons();
+                    initSkillRipple();
+                    initLogoAnimation();
+                    initMouseGlow();
+
+                    // Start orb animations after loader
+                    animateOrbs();
+                }
+            });
+        }, 3000);
+    }
+
+    // ========================================
+    // INIT: Start with loader first
+    // ========================================
+    document.addEventListener('DOMContentLoaded', function() {
+        // Start loader — it triggers everything else after 3s
+        initLoader();
     });
 
 })();

@@ -63,6 +63,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/images/store', [ImageController::class, 'store'])->name('images.store');
     Route::post('/images/destroy', [ImageController::class, 'destroy'])->name('images.destroy');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/analytics', [App\Http\Controllers\AnalyticsController::class, 'index'])->name('analytics');
+
+    // Notification AJAX routes
+    Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{id}/read', [App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
+
     Route::post('/dark-mode/toggle', [DarkModeController::class, 'toggle'])->name('dark-mode.toggle');
     Route::get('/{page}', [PageController::class, 'index'])->name('page');
 });
